@@ -1,0 +1,13 @@
+{
+  "name": "eKitaab Store",
+  "description": "The purpose of the website is to provide an online catalog for a small local library, where users can browse, read available books and manage their accounts.",
+  "repository": {
+    "url": "https://github.com/sjshank/eKitaab-Store",
+    "license": "GNU"
+  },
+  "urls": {
+    "dev": "http://localhost:3000/",
+    "prop": ""
+  },
+  "keywords": ["nextjs", "reactjs", "css", "html5", "javascript"]
+}

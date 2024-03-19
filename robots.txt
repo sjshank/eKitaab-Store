@@ -1,0 +1,10 @@
+User-agent: googlebot
+User-agent: google
+User-agent: bingbot
+User-agent: bing
+User-agent: yahoobot
+User-agent: yahoo
+User-agent: microsoftbot
+User-agent: microsoft
+Disallow: /public/
+crawl-delay: 10
