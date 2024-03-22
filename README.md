@@ -2,7 +2,6 @@
 
 The purpose of the website is to provide an online catalog for a small local library, where users can browse, read available books and manage their accounts
 
-
 ## Non-Functional Features
 
     - SEO support added : robots.txt, sitemap.xml, sitemap generator on every build run
@@ -31,9 +30,6 @@ The purpose of the website is to provide an online catalog for a small local lib
         - npx husky add .husky/pre-push "npm run build" : Build project before commit
         - commitlint.config.js : follow a standard convention for all our commit messages
 
-    
-
-   
 ## Dependencies
 
     - React :  [18.2](https://react.dev/learn/installation)

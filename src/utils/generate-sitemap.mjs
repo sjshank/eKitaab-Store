@@ -10,7 +10,9 @@ function addPage(page) {
   const route = path === '/index' ? '' : path;
 
   const URL =
-    process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '';
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'https://ekitaab-store.netlify.app';
 
   return `  <url>
     <loc>${`${URL}${route}`}</loc>
