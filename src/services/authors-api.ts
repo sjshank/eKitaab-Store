@@ -9,3 +9,8 @@ export const retrieveAllRegisteredAuthors = async () => {
   }));
   return data;
 };
+
+export const getAuthorDetailsById = async (id: any) => {
+  const data = await callApiEndpoint(`catalog/author/${id}`);
+  return data;
+};

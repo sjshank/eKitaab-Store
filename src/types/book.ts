@@ -28,7 +28,7 @@ export type TGenre = {
 
 export type TBookInstance = {
   _id: string;
-  book: string;
+  book: TBook;
   imprint: string;
   status: "Available" | "Maintenance" | "Loaned" | "Reserved";
   due_back: string;

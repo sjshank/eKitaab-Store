@@ -14,7 +14,7 @@ const Footer = () => {
       justifyContent="center"
       alignItems="center">
       <Divider flexItem variant="middle" />
-      <Typography variant="subtitle2" padding={2}>
+      <Typography variant="subtitle2" component="div" padding={2}>
         Copyright @2024
         <FavoriteIcon
           fontSize="small"

@@ -14,24 +14,23 @@ const theme: ThemeOptions = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#378677",
+      main: "#007F73",
     },
     secondary: {
       main: "#F8FAE5",
     },
     text: {
-      primary: "#1B1A17",
-      secondary: "#73777B",
+      primary: "#0F0F0F",
+      secondary: "#575f62e6",
     },
     divider: "#378677",
     background: {
-      default: "rgb(144 194 220 / 16%)",
+      default: "#FDF6F0",
     },
   },
   typography: {
     htmlFontSize: 14,
     fontFamily: oxygenMono.style.fontFamily.concat(", monospace"),
-    // fontSize: 15,
     h1: {
       fontWeight: 700,
     },
@@ -43,9 +42,6 @@ const theme: ThemeOptions = createTheme({
       accentColor: "auto",
       letterSpacing: 0.1,
       fontWeight: 600,
-      // overflow: "hidden",
-      // whiteSpace: "nowrap",
-      // textOverflow: "ellipsis",
     },
   },
   components: {
@@ -55,6 +51,11 @@ const theme: ThemeOptions = createTheme({
           width: "1.20em",
           height: "1.20em",
         },
+      },
+    },
+    MuiLink: {
+      defaultProps: {
+        color: "#1D24CA",
       },
     },
   },

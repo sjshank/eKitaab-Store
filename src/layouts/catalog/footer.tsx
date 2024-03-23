@@ -12,6 +12,8 @@ const Footer = () => {
         variant="circular"
         size="medium"
         color="secondary"
+        aria-label="back button"
+        role="link"
         onClick={() => router.back()}>
         <ArrowBackIosNewRoundedIcon fontSize="small" />
       </Fab>

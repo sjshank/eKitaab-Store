@@ -30,7 +30,6 @@ const BookCopies: React.FunctionComponent<{ copies: TBookInstance[] }> = ({
                   component={NextLink}
                   role="link"
                   tabIndex={0}
-                  color="text.primary"
                   title="View Copy Details">
                   {copy._id}
                 </Link>

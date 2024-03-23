@@ -3,9 +3,9 @@ import withRootLayout from "@/hoc/withRootLayout";
 import { NextPageWithLayout } from "@/layouts/root";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import SideBar from "./sidebar";
 import Footer from "./footer";
+import Header from "./header";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -23,11 +23,7 @@ const SecondaryLayout: NextPageWithLayout<LayoutProps> = ({
           <SideBar />
         </Grid>
         <Grid item xs={8} component="section">
-          {subHeader && (
-            <Typography variant="h4" component="h2">
-              {subHeader}
-            </Typography>
-          )}
+          <Header subHeader={subHeader} />
           {children}
         </Grid>
       </Grid>

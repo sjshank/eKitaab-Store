@@ -1,4 +1,5 @@
 export const BOOK_COPIES_TABLE_HEADER = ["Id", "Status", "Imprint", "Due Date"];
+export const BOOKS_TABLE_HEADER = ["Title", "Summary"];
 export const STATUS_IDENTITY_MAP = Object.seal({
   Available: "#83ce1a",
   Maintenance: "#E3651D",

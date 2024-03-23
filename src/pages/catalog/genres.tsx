@@ -18,9 +18,7 @@ const GenreList: NextPageWithLayout<{ genres: TGenre[] }> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps<{
-  genres: TGenre[];
-}> = async () => {
+export const getStaticProps: GetStaticProps = (async () => {
   const response = await retrieveAllRegisteredGenres();
   return {
     props: {
@@ -28,7 +26,9 @@ export const getStaticProps: GetStaticProps<{
     },
     revalidate: 30,
   };
-};
+}) satisfies GetStaticProps<{
+  genres: TGenre[];
+}>;
 
 const GenresPage = WithCatalogLayout(GenreList, { subHeader: "Genre List" });
 
