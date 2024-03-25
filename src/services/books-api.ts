@@ -1,5 +1,5 @@
 import { callApiEndpoint } from "@/lib/api";
-import { TBook, TBookFormFields, TBookInstance } from "@/types/book";
+import { TBookFormFields, TBookInstance } from "@/types/book";
 
 export const retrieveAllBooksFromCatalog = async () => {
   const data = await callApiEndpoint(`catalog/books`);

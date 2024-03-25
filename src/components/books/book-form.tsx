@@ -32,7 +32,7 @@ const ConnectedForm = (
           {`${author.first_name} ${author.family_name}`}
         </MenuItem>
       )),
-    []
+    [authors]
   );
 
   const genreOptions = useMemo(
@@ -42,7 +42,7 @@ const ConnectedForm = (
           {genre.name}
         </MenuItem>
       )),
-    []
+    [genres]
   );
 
   return (

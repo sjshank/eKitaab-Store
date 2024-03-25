@@ -28,12 +28,9 @@ const FormContextProvider: React.FunctionComponent<TFormContextProps> = ({
     ctaLabel: "Submit",
   } as TFormLegends);
 
-  const formLegendsUpdateHandler = useCallback(
-    (_legends: TFormLegends) => {
-      setFormLegends({ ..._legends });
-    },
-    [formLegends]
-  );
+  const formLegendsUpdateHandler = useCallback((_legends: TFormLegends) => {
+    setFormLegends({ ..._legends });
+  }, []);
 
   return (
     <FormContext.Provider

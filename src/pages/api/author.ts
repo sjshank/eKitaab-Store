@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const { query, body, method } = req;
+  const { body, method } = req;
   if (method === "POST") {
     const [fetchUrl, fetchOptions] = prepareApiEndpoint(
       `${process.env.API_ENDPOINT_ORIGIN}catalog/author/create`,

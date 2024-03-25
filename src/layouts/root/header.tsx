@@ -4,8 +4,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import LocalLibraryRoundedIcon from "@mui/icons-material/LocalLibraryRounded";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import NextLink from "next/link";
 
 const Header = () => {
   return (
@@ -27,20 +25,6 @@ const Header = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      {/* <nav>
-        <NextLink href="/">
-          <HomeRoundedIcon
-            fontSize="large"
-            sx={{
-              position: "relative",
-              right: "50px",
-              top: "8px",
-              color: "#fff",
-              cursor: "pointer",
-            }}
-          />
-        </NextLink>
-      </nav> */}
     </Stack>
   );
 };

@@ -1,10 +1,9 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { FormikProps } from "formik";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { withFormik } from "formik";
 import { TAuthor } from "@/types/book";
-import SaveAltRoundedIcon from "@mui/icons-material/SaveAltRounded";
 import FormLayout from "@/layouts/form";
 import { AuthorFormSchema } from "@/utils/yup-schema";
 import { AuthorFormFields } from "@/utils/form-fields";
@@ -83,7 +82,7 @@ const AuthorForm = withFormik<TAuthorFormProps, TAuthor>({
 
   handleSubmit: (values, formikBag) => {
     const { props, setSubmitting } = formikBag;
-    console.log(values);
+    // console.log(values);
     props.onSubmit(values);
     setSubmitting(false);
   },

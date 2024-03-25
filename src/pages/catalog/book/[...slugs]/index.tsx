@@ -86,7 +86,7 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
 export const getServerSideProps: GetServerSideProps<TBookDetail> = (async (
   context
 ) => {
-  const { res, req, params } = context;
+  const { res, params } = context;
   res.setHeader(
     "Cache-Control",
     "public, s-maxage=20, stale-while-revalidate=30"

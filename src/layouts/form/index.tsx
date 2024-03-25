@@ -58,7 +58,7 @@ const FormLayout: React.FunctionComponent<TFormProps> = ({
         ))}
       </>
     );
-  }, []);
+  }, [formFields, touched, errors, values]);
 
   const populateSelectFields = useMemo(() => {
     if (!formFields.selectFields || formFields.selectFields.length == 0) {
@@ -68,11 +68,10 @@ const FormLayout: React.FunctionComponent<TFormProps> = ({
     return (
       <>
         {selectFields.map((field: any) => (
-          <FormControl required sx={{ my: 2 }}>
+          <FormControl key={field.id} required sx={{ my: 2 }}>
             <InputLabel id={`select-${field.label}`}>{field.label}</InputLabel>
             <Select
               labelId={`select-${field.label}`}
-              key={field.id}
               id={field.id}
               label={field.label}
               name={field.name}
@@ -93,7 +92,7 @@ const FormLayout: React.FunctionComponent<TFormProps> = ({
         ))}
       </>
     );
-  }, []);
+  }, [[formFields, touched, errors, values]]);
 
   return (
     <>

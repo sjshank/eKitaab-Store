@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { prepareApiEndpoint } from "@/lib/api";
-import { TGenre } from "@/types/book";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
