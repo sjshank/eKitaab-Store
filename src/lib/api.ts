@@ -1,8 +1,10 @@
+import { isValidUrlFormat } from "@/utils/helper";
+
 interface GenericApiFn<String, Type> {
   (api: String, arg?: Type): Type;
 }
 
-const prepareApiEndpoint: GenericApiFn<string, any> = (
+export const prepareApiEndpoint: GenericApiFn<string, any> = (
   api: string,
   _options?: any
 ) => {
@@ -12,7 +14,12 @@ const prepareApiEndpoint: GenericApiFn<string, any> = (
       "Content-Type": "application/json",
     },
   };
-  return [`${process.env.API_ENDPOINT_ORIGIN}${api}`, options];
+  return [
+    isValidUrlFormat(api)
+      ? `${api}`
+      : `${process.env.API_ENDPOINT_ORIGIN}${api}`,
+    options,
+  ];
 };
 
 export const callApiEndpoint: GenericApiFn<string, any> = async (

@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import SideBar from "./sidebar";
 import Footer from "./footer";
 import Header from "./header";
+import FormContextProvider from "@/context/form-context";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -23,8 +24,10 @@ const SecondaryLayout: NextPageWithLayout<LayoutProps> = ({
           <SideBar />
         </Grid>
         <Grid item xs={8} component="section">
-          <Header subHeader={subHeader} />
-          {children}
+          <FormContextProvider>
+            <Header subHeader={subHeader} />
+            {children}
+          </FormContextProvider>
         </Grid>
       </Grid>
       <Footer />

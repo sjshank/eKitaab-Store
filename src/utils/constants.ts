@@ -51,8 +51,8 @@ export const SIDEBAR_NAVIGATIONS = [
         path: "/catalog/genres",
       },
       {
-        label: "Register New Genre",
-        path: "/catalog/genre/register",
+        label: "Add New Genre",
+        path: "/catalog/genre/add",
       },
     ],
   },

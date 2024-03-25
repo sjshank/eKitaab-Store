@@ -39,7 +39,11 @@ const BookInstance: NextPageWithLayout<TBookInstanceDetail> = ({
 };
 
 export const getServerSideProps: GetServerSideProps<any> = async (context) => {
-  const { params } = context;
+  const { res, req, params } = context;
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=20, stale-while-revalidate=30"
+  );
   const { book, copy } = await getBookInstanceDetailsById(params?.id);
   return {
     props: {

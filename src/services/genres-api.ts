@@ -6,7 +6,23 @@ export const retrieveAllRegisteredGenres = async () => {
   return data;
 };
 
-export const getGenreDetailsById = async (id: any) => {
+export const getGenreDetailsById = async (id: string) => {
   const data = await callApiEndpoint(`catalog/genre/${id}`);
+  return data;
+};
+
+export const addNewGenre = async (name: string) => {
+  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`, {
+    method: "POST",
+    body: JSON.stringify({ name: name }),
+  });
+  return data;
+};
+
+export const updateGenreById = async (genre: TGenre) => {
+  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`, {
+    method: "PUT",
+    body: JSON.stringify({ ...genre }),
+  });
   return data;
 };

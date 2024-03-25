@@ -7,12 +7,17 @@ export type TBook = {
   author: TAuthor;
 };
 
+export type TBookFormFields = Omit<TBook, "author" | "genre"> & {
+  author: string;
+  genre: string[];
+};
+
 export type TAuthor = {
   _id: string;
   first_name: string;
   family_name: string;
-  date_of_birth: string;
-  date_of_death: string;
+  date_of_birth?: string;
+  date_of_death?: string;
 };
 
 export type TAllBooks = {

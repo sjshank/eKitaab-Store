@@ -3,6 +3,8 @@ import type { AppProps } from "next/app";
 import { useReportWebVitals } from "next/web-vitals";
 import { AppCacheProvider } from "@mui/material-nextjs/v14-pagesRouter";
 import { NextPageWithLayout } from "@/layouts/root";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -21,8 +23,10 @@ export default function MyApp(props: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return getLayout(
-    <AppCacheProvider {...props}>
-      <Component {...pageProps} {...session} />
-    </AppCacheProvider>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <AppCacheProvider {...props}>
+        <Component {...pageProps} {...session} />
+      </AppCacheProvider>
+    </LocalizationProvider>
   );
 }
