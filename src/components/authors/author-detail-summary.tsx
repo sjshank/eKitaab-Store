@@ -8,10 +8,12 @@ const AuthorDetailSummary: React.FunctionComponent<TAuthor> = (
 ): React.JSX.Element => {
   return (
     <List>
-      <MuiSummaryItem
-        label="Date Of Birth"
-        value={new Date(author.date_of_birth).toDateString()}
-      />
+      {author.date_of_birth && (
+        <MuiSummaryItem
+          label="Date Of Birth"
+          value={new Date(author.date_of_birth).toDateString()}
+        />
+      )}
       {author.date_of_death && (
         <MuiSummaryItem
           label="Date Of Death"

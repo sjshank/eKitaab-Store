@@ -16,7 +16,7 @@ const BookDetailSummary: React.FunctionComponent<TBook> = (
           component={NextLink}
           role="link"
           tabIndex={0}
-          title="View Author Details"
+          title="View Details"
           sx={{ fontSize: 15 }}>
           {`${book.author.first_name},${book.author.family_name}`}
         </Link>

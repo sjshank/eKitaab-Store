@@ -4,7 +4,7 @@ import { withFormik } from "formik";
 import { TGenre } from "@/types/book";
 import FormLayout from "@/layouts/form";
 import { GenreFormSchema } from "@/utils/yup-schema";
-import { GenreFormFields } from "@/utils/form-fields";
+import GenreFormFields from "./genre-form-fields";
 
 export type TGenreFormProps = {
   genre: TGenre;
@@ -14,7 +14,9 @@ export type TGenreFormProps = {
 
 const ConnectedForm = (props: TGenreFormProps & FormikProps<TGenre>) => {
   return (
-    <FormLayout formikProps={props} formFields={GenreFormFields}></FormLayout>
+    <FormLayout formikProps={props}>
+      <GenreFormFields {...props} />
+    </FormLayout>
   );
 };
 

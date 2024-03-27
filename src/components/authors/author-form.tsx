@@ -1,12 +1,11 @@
 import React from "react";
 import { FormikProps } from "formik";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { withFormik } from "formik";
 import { TAuthor } from "@/types/book";
 import FormLayout from "@/layouts/form";
 import { AuthorFormSchema } from "@/utils/yup-schema";
-import { AuthorFormFields } from "@/utils/form-fields";
+import AuthorFormFields from "./author-form-fields";
 
 export type TAuthorFormProps = {
   author: TAuthor;
@@ -15,52 +14,9 @@ export type TAuthorFormProps = {
 };
 
 const ConnectedForm = (props: TAuthorFormProps & FormikProps<TAuthor>) => {
-  const { touched, errors, values } = props;
-
   return (
-    <FormLayout formikProps={props} formFields={AuthorFormFields}>
-      <DatePicker
-        label="Date Of Birth (optional)"
-        name="date_of_birth"
-        sx={{ my: 2 }}
-        autoFocus={false}
-        reduceAnimations={true}
-        formatDensity="spacious"
-        value={dayjs(values.date_of_birth)}
-        maxDate={dayjs().subtract(5, "years")}
-        onChange={(value) =>
-          value ??
-          props.setFieldValue("date_of_birth", dayjs(value).toISOString(), true)
-        }
-        slotProps={{
-          textField: {
-            margin: "dense",
-            helperText: touched.date_of_birth && errors.date_of_birth,
-          },
-        }}
-        disableFuture
-      />
-      <DatePicker
-        label="Date Of Death (optional)"
-        name="date_of_death"
-        sx={{ my: 2 }}
-        autoFocus={false}
-        reduceAnimations={true}
-        formatDensity="spacious"
-        // value={dayjs(values.date_of_death)}
-        maxDate={dayjs().subtract(1, "day")}
-        onChange={(value) =>
-          value ??
-          props.setFieldValue("date_of_death", dayjs(value).toISOString(), true)
-        }
-        slotProps={{
-          textField: {
-            margin: "dense",
-            helperText: touched.date_of_death && errors.date_of_death,
-          },
-        }}
-        disableFuture
-      />
+    <FormLayout formikProps={props}>
+      <AuthorFormFields {...props} />
     </FormLayout>
   );
 };
@@ -82,7 +38,6 @@ const AuthorForm = withFormik<TAuthorFormProps, TAuthor>({
 
   handleSubmit: (values, formikBag) => {
     const { props, setSubmitting } = formikBag;
-    // console.log(values);
     props.onSubmit(values);
     setSubmitting(false);
   },

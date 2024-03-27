@@ -17,13 +17,11 @@ import FormHelperText from "@mui/material/FormHelperText";
 type TFormProps = {
   children?: React.ReactNode;
   formikProps: FormikProps<any> & any;
-  formFields?: any;
 };
 
 const FormLayout: React.FunctionComponent<TFormProps> = ({
   children = null,
   formikProps,
-  formFields = {},
 }) => {
   const router = useRouter();
   const { formLegends, updateFormLegends } =
@@ -32,67 +30,67 @@ const FormLayout: React.FunctionComponent<TFormProps> = ({
   const { isSubmitting, touched, errors, handleChange, handleBlur, values } =
     formikProps;
 
-  const populateTextFields = useMemo(() => {
-    if (!formFields.textFields || formFields.textFields.length == 0) {
-      return null;
-    }
-    const textFields = formFields.textFields;
-    return (
-      <>
-        {textFields.map((field: any) => (
-          <TextField
-            key={field.id}
-            id={field.id}
-            label={field.label}
-            name={field.name}
-            fullWidth
-            variant="outlined"
-            margin="dense"
-            sx={{ my: 2 }}
-            value={values[field.value]}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            helperText={touched[field.value] && errors[field.value]}
-            error={Boolean(errors[field.value]) && touched[field.value]}
-            required></TextField>
-        ))}
-      </>
-    );
-  }, [formFields, touched, errors, values]);
+  // const populateTextFields = useMemo(() => {
+  //   if (!formFields.textFields || formFields.textFields.length == 0) {
+  //     return null;
+  //   }
+  //   const textFields = formFields.textFields;
+  //   return (
+  //     <>
+  //       {textFields.map((field: any) => (
+  //         <TextField
+  //           key={field.id}
+  //           id={field.id}
+  //           label={field.label}
+  //           name={field.name}
+  //           fullWidth
+  //           variant="outlined"
+  //           margin="dense"
+  //           sx={{ my: 2 }}
+  //           value={values[field.value]}
+  //           onChange={handleChange}
+  //           onBlur={handleBlur}
+  //           helperText={touched[field.value] && errors[field.value]}
+  //           error={Boolean(errors[field.value]) && touched[field.value]}
+  //           required></TextField>
+  //       ))}
+  //     </>
+  //   );
+  // }, [formFields, touched, errors, values]);
 
-  const populateSelectFields = useMemo(() => {
-    if (!formFields.selectFields || formFields.selectFields.length == 0) {
-      return null;
-    }
-    const selectFields = formFields.selectFields;
-    return (
-      <>
-        {selectFields.map((field: any) => (
-          <FormControl key={field.id} required sx={{ my: 2 }}>
-            <InputLabel id={`select-${field.label}`}>{field.label}</InputLabel>
-            <Select
-              labelId={`select-${field.label}`}
-              id={field.id}
-              label={field.label}
-              name={field.name}
-              size="medium"
-              required
-              tabIndex={0}
-              color="primary"
-              value={values[field.value]}
-              onBlur={handleBlur}
-              onChange={handleChange}
-              error={Boolean(errors[field.value]) && touched[field.value]}>
-              {field.options}
-            </Select>
-            <FormHelperText className="Mui-error">
-              {touched[field.value] && errors[field.value]}
-            </FormHelperText>
-          </FormControl>
-        ))}
-      </>
-    );
-  }, [[formFields, touched, errors, values]]);
+  // const populateSelectFields = useMemo(() => {
+  //   if (!formFields.selectFields || formFields.selectFields.length == 0) {
+  //     return null;
+  //   }
+  //   const selectFields = formFields.selectFields;
+  //   return (
+  //     <>
+  //       {selectFields.map((field: any) => (
+  //         <FormControl key={field.id} required sx={{ my: 2 }}>
+  //           <InputLabel id={`select-${field.label}`}>{field.label}</InputLabel>
+  //           <Select
+  //             labelId={`select-${field.label}`}
+  //             id={field.id}
+  //             label={field.label}
+  //             name={field.name}
+  //             size="medium"
+  //             required
+  //             tabIndex={0}
+  //             color="primary"
+  //             value={values[field.value]}
+  //             onBlur={handleBlur}
+  //             onChange={handleChange}
+  //             error={Boolean(errors[field.value]) && touched[field.value]}>
+  //             {field.options}
+  //           </Select>
+  //           <FormHelperText className="Mui-error">
+  //             {touched[field.value] && errors[field.value]}
+  //           </FormHelperText>
+  //         </FormControl>
+  //       ))}
+  //     </>
+  //   );
+  // }, [[formFields, touched, errors, values]]);
 
   return (
     <>
@@ -106,8 +104,8 @@ const FormLayout: React.FunctionComponent<TFormProps> = ({
         flexDirection="column"
         padding={2}>
         <>
-          {populateTextFields}
-          {populateSelectFields}
+          {/* {populateTextFields}
+          {populateSelectFields} */}
           {children}
         </>
         <Stack direction="row" alignSelf="center" gap={3} marginY={3}>
