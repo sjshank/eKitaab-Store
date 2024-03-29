@@ -1,10 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { prepareApiEndpoint } from "@/lib/api";
+import { TAuthor } from "@/types/book";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: NextApiResponse<TAuthor>
 ) {
   const { body, method } = req;
   if (method === "POST") {
@@ -16,21 +17,29 @@ export default async function handler(
       }
     );
     const response = await fetch(fetchUrl, fetchOptions);
-    const data = await response.json();
+    const data = (await response.json()) as TAuthor;
     res.status(200).json(data);
   } else if (method === "PUT") {
     const author = JSON.parse(body);
     const [fetchUrl, fetchOptions] = prepareApiEndpoint(
       `${process.env.API_ENDPOINT_ORIGIN}catalog/author/${author._id}/update`,
       {
-        method: "POST",
+        method: "PUT",
         body: body,
       }
     );
     const response = await fetch(fetchUrl, fetchOptions);
-    const data = await response.json();
+    const data = (await response.json()) as TAuthor;
     res.status(200).json(data);
-  } else {
-    res.status(200).json({ name: "John Doe" });
+  } else if (method === "DELETE") {
+    const [fetchUrl, fetchOptions] = prepareApiEndpoint(
+      `${process.env.API_ENDPOINT_ORIGIN}catalog/author/${body}/delete`,
+      {
+        method: "DELETE",
+      }
+    );
+    const response = await fetch(fetchUrl, fetchOptions);
+    const data = (await response.json()) as TAuthor;
+    res.status(200).json(data);
   }
 }

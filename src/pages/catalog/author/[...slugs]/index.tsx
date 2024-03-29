@@ -2,8 +2,9 @@ import WithCatalogLayout from "@/hoc/withCatalogLayout";
 import { NextPageWithLayout } from "@/layouts/root";
 import { TAuthor, TBook } from "@/types/book";
 import type { GetStaticProps, GetStaticPaths } from "next";
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext } from "react";
 import {
+  deleteAuthorById,
   getAuthorDetailsById,
   retrieveAllRegisteredAuthors,
   updateAuthorDetailsById,
@@ -13,8 +14,11 @@ import AuthorDetailSummary from "@/components/authors/author-detail-summary";
 import BooksTable from "@/components/common/books-table";
 import WithDetailLayoutWrapper from "@/hoc/withDetailLayout";
 import { useRouter } from "next/router";
-import AuthorForm, { TAuthorFormProps } from "@/components/authors/author-form";
+import AuthorForm from "@/components/authors/author-form";
 import { FormContext, TFormContext } from "@/context/form-context";
+import useFormLegends from "@/hooks/useFormLegends";
+import usePerformDelete from "@/hooks/usePerformDelete";
+import useInitialValues from "@/hooks/useInitialValues";
 
 type TAuthorDetail = {
   author: TAuthor;
@@ -27,31 +31,27 @@ const AuthorDetailPage: NextPageWithLayout<TAuthorDetail> = ({
   books,
   title,
 }: TAuthorDetail) => {
+  useFormLegends("Update Author Details", "Update");
+  usePerformDelete(deleteAuthorById.bind(null, author._id), "authors");
+
   const router = useRouter();
   const { formLegends, updateFormLegends } =
     useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
 
-  useEffect(() => {
-    updateFormLegends({
-      ...formLegends,
-      formTitle: "Update Author Details",
-      ctaLabel: "Update",
-    });
-  }, []);
-
-  const handleSubmitAction = async (author: TAuthor) => {
+  const handleSubmitAction = useCallback(async (author: TAuthor) => {
     const response = await updateAuthorDetailsById(author);
     if (response) {
       router.push(author._id);
       updateFormLegends({ ...formLegends, isEdit: false });
     }
-  };
-  const initialValues: TAuthorFormProps = {
+  }, []);
+
+  const initialValues = useInitialValues({
     author: { ...author },
     onSubmit: handleSubmitAction,
-    buttonLbl: "Update",
-  };
+  });
+
   return (
     <Stack>
       {!isEdit && (

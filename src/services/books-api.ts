@@ -34,6 +34,14 @@ export const updateBookDetailsById = async (book: TBookFormFields) => {
   return data;
 };
 
+export const deleteBookById = async (id: string) => {
+  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/book`, {
+    method: "DELETE",
+    body: id,
+  });
+  return data;
+};
+
 export const retrieveAllBookInstancesFromCatalog = async () => {
   let data = (await callApiEndpoint(
     `catalog/bookinstances`
@@ -72,6 +80,17 @@ export const updateBookInstanceDetailsById = async (
     {
       method: "PUT",
       body: JSON.stringify({ ...bookInstanceFormFieldValues }),
+    }
+  );
+  return data;
+};
+
+export const deleteBookInstanceById = async (id: string) => {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/bookinstance`,
+    {
+      method: "DELETE",
+      body: id,
     }
   );
   return data;

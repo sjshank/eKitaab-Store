@@ -1,15 +1,16 @@
 import WithCatalogLayout from "@/hoc/withCatalogLayout";
 import { NextPageWithLayout } from "@/layouts/root";
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/router";
 import { TAuthor, TBookFormFields, TGenre } from "@/types/book";
-import { FormContext, TFormContext } from "@/context/form-context";
 import BookForm, { TBookFormProps } from "@/components/books/book-form";
 import { registerNewBook } from "@/services/books-api";
 import { GetStaticProps } from "next";
 import { retrieveAllRegisteredAuthors } from "@/services/authors-api";
 import { retrieveAllRegisteredGenres } from "@/services/genres-api";
+import useFormLegends from "@/hooks/useFormLegends";
+import useInitialValues from "@/hooks/useInitialValues";
 
 type TRegisterBookProps = {
   authors: TAuthor[];
@@ -20,17 +21,8 @@ const RegisterBook: NextPageWithLayout<TRegisterBookProps> = ({
   authors,
   genres,
 }) => {
+  useFormLegends("Register New Book", "Submit");
   const router = useRouter();
-  const { formLegends, updateFormLegends } =
-    useContext<TFormContext>(FormContext);
-
-  useEffect(() => {
-    updateFormLegends({
-      ...formLegends,
-      formTitle: "Register New Book",
-      ctaLabel: "Submit",
-    });
-  }, []);
 
   const handleSubmitAction = async (bookFormFieldValues: TBookFormFields) => {
     const response = await registerNewBook(bookFormFieldValues);
@@ -38,7 +30,8 @@ const RegisterBook: NextPageWithLayout<TRegisterBookProps> = ({
       router.push("/catalog/books");
     }
   };
-  const initialValues: TBookFormProps = {
+
+  const initialValues = useInitialValues({
     book: {
       _id: "",
       author: "",
@@ -50,7 +43,8 @@ const RegisterBook: NextPageWithLayout<TRegisterBookProps> = ({
     onSubmit: handleSubmitAction,
     authors: authors,
     genres: genres,
-  };
+  });
+
   return (
     <Stack>
       <BookForm {...initialValues} />

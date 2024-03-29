@@ -1,6 +1,7 @@
 import WithCatalogLayout from "@/hoc/withCatalogLayout";
 import { NextPageWithLayout } from "@/layouts/root";
 import {
+  deleteBookInstanceById,
   getBookInstanceDetailsById,
   retrieveAllBooksFromCatalog,
   updateBookInstanceDetailsById,
@@ -8,17 +9,18 @@ import {
 import { TBook, TBookInstance, TBookInstanceFormFields } from "@/types/book";
 import { Stack } from "@mui/joy";
 import type { GetServerSideProps } from "next";
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext } from "react";
 import WithDetailLayoutWrapper from "@/hoc/withDetailLayout";
 import BookDetailSummary from "@/components/common/book-detail-summary";
 import { useRouter } from "next/router";
 import { FormContext, TFormContext } from "@/context/form-context";
-import BookInstanceForm, {
-  TBookInstanceFormProps,
-} from "@/components/instances/book-instance-form";
+import BookInstanceForm from "@/components/instances/book-instance-form";
 import BookInstanceSummary from "@/components/instances/book-instance-summary";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import useFormLegends from "@/hooks/useFormLegends";
+import usePerformDelete from "@/hooks/usePerformDelete";
+import useInitialValues from "@/hooks/useInitialValues";
 
 type TBookInstanceDetail = {
   bookInstance: TBookInstance;
@@ -33,39 +35,38 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
   title,
   book,
 }: TBookInstanceDetail) => {
+  useFormLegends("Update Book Instance Details", "Update");
+  usePerformDelete(
+    deleteBookInstanceById.bind(null, bookInstance._id),
+    "bookinstances"
+  );
+
   const router = useRouter();
   const { formLegends, updateFormLegends } =
     useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
 
-  useEffect(() => {
-    updateFormLegends({
-      ...formLegends,
-      formTitle: "Update Book Instance Details",
-      ctaLabel: "Update",
-    });
-  }, []);
+  const handleSubmitAction = useCallback(
+    async (bookInstanceFormFieldValues: TBookInstanceFormFields) => {
+      const response = await updateBookInstanceDetailsById(
+        bookInstanceFormFieldValues
+      );
+      if (response) {
+        router.push(bookInstance._id);
+        updateFormLegends({ ...formLegends, isEdit: false });
+      }
+    },
+    []
+  );
 
-  const handleSubmitAction = async (
-    bookInstanceFormFieldValues: TBookInstanceFormFields
-  ) => {
-    const response = await updateBookInstanceDetailsById(
-      bookInstanceFormFieldValues
-    );
-    if (response) {
-      router.push(bookInstance._id);
-      updateFormLegends({ ...formLegends, isEdit: false });
-    }
-  };
-
-  const initialValues: TBookInstanceFormProps = {
+  const initialValues = useInitialValues({
     bookInstance: {
       ...bookInstance,
       book: book._id,
     },
     onSubmit: handleSubmitAction,
     books: books,
-  };
+  });
 
   return (
     <Stack>

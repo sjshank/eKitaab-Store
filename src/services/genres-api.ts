@@ -26,3 +26,11 @@ export const updateGenreById = async (genre: TGenre) => {
   });
   return data;
 };
+
+export const deleteGenreById = async (id: string) => {
+  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`, {
+    method: "DELETE",
+    body: id,
+  });
+  return data;
+};

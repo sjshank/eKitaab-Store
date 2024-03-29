@@ -1,6 +1,7 @@
 import WithCatalogLayout from "@/hoc/withCatalogLayout";
 import { NextPageWithLayout } from "@/layouts/root";
 import {
+  deleteBookById,
   getBookDetailsById,
   updateBookDetailsById,
 } from "@/services/books-api";
@@ -13,7 +14,7 @@ import {
 } from "@/types/book";
 import { Stack } from "@mui/joy";
 import type { GetServerSideProps } from "next";
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext } from "react";
 import BookCopies from "@/components/books/book-copies-table";
 import WithDetailLayoutWrapper from "@/hoc/withDetailLayout";
 import BookDetailSummary from "@/components/common/book-detail-summary";
@@ -21,7 +22,10 @@ import { retrieveAllRegisteredAuthors } from "@/services/authors-api";
 import { retrieveAllRegisteredGenres } from "@/services/genres-api";
 import { useRouter } from "next/router";
 import { FormContext, TFormContext } from "@/context/form-context";
-import BookForm, { TBookFormProps } from "@/components/books/book-form";
+import BookForm from "@/components/books/book-form";
+import useFormLegends from "@/hooks/useFormLegends";
+import usePerformDelete from "@/hooks/usePerformDelete";
+import useInitialValues from "@/hooks/useInitialValues";
 
 type TBookDetail = {
   book: TBook;
@@ -38,28 +42,23 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
   authors,
   genres,
 }: TBookDetail) => {
+  useFormLegends("Update Book Details", "Update");
+  usePerformDelete(deleteBookById.bind(null, book._id), "books");
+
   const router = useRouter();
   const { formLegends, updateFormLegends } =
     useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
 
-  useEffect(() => {
-    updateFormLegends({
-      ...formLegends,
-      formTitle: "Update Book Details",
-      ctaLabel: "Update",
-    });
-  }, []);
-
-  const handleSubmitAction = async (book: TBookFormFields) => {
+  const handleSubmitAction = useCallback(async (book: TBookFormFields) => {
     const response = await updateBookDetailsById(book);
     if (response) {
       router.push(book._id);
       updateFormLegends({ ...formLegends, isEdit: false });
     }
-  };
+  }, []);
 
-  const initialValues: TBookFormProps = {
+  const initialValues = useInitialValues({
     book: {
       ...book,
       genre: book.genre.map((g) => g._id),
@@ -68,7 +67,7 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
     onSubmit: handleSubmitAction,
     authors: authors,
     genres: genres,
-  };
+  });
 
   return (
     <Stack>

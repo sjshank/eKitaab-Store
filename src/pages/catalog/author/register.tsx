@@ -1,33 +1,25 @@
 import WithCatalogLayout from "@/hoc/withCatalogLayout";
 import { NextPageWithLayout } from "@/layouts/root";
-import React, { useContext, useEffect } from "react";
+import React, { useCallback } from "react";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/router";
 import { TAuthor } from "@/types/book";
-import AuthorForm, { TAuthorFormProps } from "@/components/authors/author-form";
+import AuthorForm from "@/components/authors/author-form";
 import { registerNewAuthor } from "@/services/authors-api";
-import { FormContext, TFormContext } from "@/context/form-context";
+import useFormLegends from "@/hooks/useFormLegends";
+import useInitialValues from "@/hooks/useInitialValues";
 
 const RegisterAuthor: NextPageWithLayout<{}> = () => {
+  useFormLegends("Register New Author", "Submit");
   const router = useRouter();
-  const { formLegends, updateFormLegends } =
-    useContext<TFormContext>(FormContext);
 
-  useEffect(() => {
-    updateFormLegends({
-      ...formLegends,
-      formTitle: "Register New Author",
-      ctaLabel: "Submit",
-    });
-  }, []);
-
-  const handleSubmitAction = async (author: TAuthor) => {
+  const handleSubmitAction = useCallback(async (author: TAuthor) => {
     const response = await registerNewAuthor(author);
     if (response) {
       router.push("/catalog/authors");
     }
-  };
-  const initialValues: TAuthorFormProps = {
+  }, []);
+  const initialValues = useInitialValues({
     author: {
       _id: "",
       date_of_birth: "",
@@ -36,7 +28,8 @@ const RegisterAuthor: NextPageWithLayout<{}> = () => {
       first_name: "",
     },
     onSubmit: handleSubmitAction,
-  };
+  });
+
   return (
     <Stack>
       <AuthorForm {...initialValues} />

@@ -2,18 +2,22 @@ import WithCatalogLayout from "@/hoc/withCatalogLayout";
 import { NextPageWithLayout } from "@/layouts/root";
 import { TGenre, TBook } from "@/types/book";
 import type { GetStaticProps, GetStaticPaths } from "next";
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext } from "react";
 import Stack from "@mui/material/Stack";
 import BooksTable from "@/components/common/books-table";
 import {
+  deleteGenreById,
   getGenreDetailsById,
   retrieveAllRegisteredGenres,
   updateGenreById,
 } from "@/services/genres-api";
 import WithDetailLayoutWrapper from "@/hoc/withDetailLayout";
-import GenreForm, { TGenreFormProps } from "@/components/genres/genre-form";
+import GenreForm from "@/components/genres/genre-form";
 import { useRouter } from "next/router";
 import { FormContext, TFormContext } from "@/context/form-context";
+import useFormLegends from "@/hooks/useFormLegends";
+import usePerformDelete from "@/hooks/usePerformDelete";
+import useInitialValues from "@/hooks/useInitialValues";
 
 type TGenreDetail = {
   genre: TGenre;
@@ -26,30 +30,27 @@ const GenreDetail: NextPageWithLayout<TGenreDetail> = ({
   books,
   title,
 }: TGenreDetail): React.JSX.Element => {
+  useFormLegends("Update Genre", "Update");
+  usePerformDelete(deleteGenreById.bind(null, genre._id), "genres");
+
   const router = useRouter();
   const { formLegends, updateFormLegends } =
     useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
 
-  useEffect(() => {
-    updateFormLegends({
-      ...formLegends,
-      formTitle: "Update Genre",
-      ctaLabel: "Update",
-    });
-  }, []);
-
-  const handleSubmitAction = async (genre: TGenre) => {
+  const handleSubmitAction = useCallback(async (genre: TGenre) => {
     const response = await updateGenreById(genre);
     if (response) {
       router.push(genre._id);
       updateFormLegends({ ...formLegends, isEdit: false });
     }
-  };
-  const initialValues: TGenreFormProps = {
+  }, []);
+
+  const initialValues = useInitialValues({
     genre: { ...genre },
     onSubmit: handleSubmitAction,
-  };
+  });
+
   return (
     <Stack>
       {!isEdit && <BooksTable books={books} />}

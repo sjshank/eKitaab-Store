@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import React, { createContext, useCallback, useState } from "react";
 
-type TFormLegends = {
+export type TFormLegends = {
   isEdit: boolean;
   formTitle: string;
   ctaLabel: string;
+  performDelete: boolean;
 };
 
 export type TFormContext = {
@@ -26,6 +27,7 @@ const FormContextProvider: React.FunctionComponent<TFormContextProps> = ({
     isEdit: router.asPath.includes("update"),
     formTitle: "Form",
     ctaLabel: "Submit",
+    performDelete: false,
   } as TFormLegends);
 
   const formLegendsUpdateHandler = useCallback((_legends: TFormLegends) => {

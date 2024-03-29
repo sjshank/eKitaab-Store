@@ -1,10 +1,9 @@
 import WithCatalogLayout from "@/hoc/withCatalogLayout";
 import { NextPageWithLayout } from "@/layouts/root";
-import React, { useContext, useEffect } from "react";
+import React, { useCallback } from "react";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/router";
 import { TBook, TBookInstanceFormFields } from "@/types/book";
-import { FormContext, TFormContext } from "@/context/form-context";
 import {
   createNewBookInstance,
   retrieveAllBooksFromCatalog,
@@ -13,6 +12,8 @@ import { GetStaticProps } from "next";
 import BookInstanceForm, {
   TBookInstanceFormProps,
 } from "@/components/instances/book-instance-form";
+import useFormLegends from "@/hooks/useFormLegends";
+import useInitialValues from "@/hooks/useInitialValues";
 
 type TRegisterBookProps = {
   books: TBook[];
@@ -21,27 +22,19 @@ type TRegisterBookProps = {
 const CreateBookInstance: NextPageWithLayout<TRegisterBookProps> = ({
   books,
 }) => {
+  useFormLegends("Create New Book Instance", "Submit");
   const router = useRouter();
-  const { formLegends, updateFormLegends } =
-    useContext<TFormContext>(FormContext);
 
-  useEffect(() => {
-    updateFormLegends({
-      ...formLegends,
-      formTitle: "Create New Book Instance",
-      ctaLabel: "Submit",
-    });
-  }, []);
-
-  const handleSubmitAction = async (
-    bookInstanceFormFieldValues: TBookInstanceFormFields
-  ) => {
-    const response = await createNewBookInstance(bookInstanceFormFieldValues);
-    if (response) {
-      router.push("/catalog/bookinstances");
-    }
-  };
-  const initialValues: TBookInstanceFormProps = {
+  const handleSubmitAction = useCallback(
+    async (bookInstanceFormFieldValues: TBookInstanceFormFields) => {
+      const response = await createNewBookInstance(bookInstanceFormFieldValues);
+      if (response) {
+        router.push("/catalog/bookinstances");
+      }
+    },
+    []
+  );
+  const initialValues = useInitialValues({
     bookInstance: {
       _id: "",
       book: "",
@@ -51,7 +44,8 @@ const CreateBookInstance: NextPageWithLayout<TRegisterBookProps> = ({
     },
     onSubmit: handleSubmitAction,
     books: books,
-  };
+  });
+
   return (
     <Stack>
       <BookInstanceForm {...initialValues} />
