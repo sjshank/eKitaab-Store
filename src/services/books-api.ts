@@ -1,5 +1,9 @@
 import { callApiEndpoint } from "@/lib/api";
-import { TBookFormFields, TBookInstance } from "@/types/book";
+import {
+  TBookFormFields,
+  TBookInstance,
+  TBookInstanceFormFields,
+} from "@/types/book";
 
 export const retrieveAllBooksFromCatalog = async () => {
   const data = await callApiEndpoint(`catalog/books`);
@@ -43,5 +47,32 @@ export const retrieveAllBookInstancesFromCatalog = async () => {
 
 export const getBookInstanceDetailsById = async (id: any) => {
   const data = await callApiEndpoint(`catalog/bookinstance/${id}`);
+  return data;
+};
+
+export const createNewBookInstance = async (
+  bookInstance: TBookInstanceFormFields
+) => {
+  let _bookInstance = { ...bookInstance, dueDate: bookInstance.due_back };
+  const data = await callApiEndpoint(
+    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/bookinstance`,
+    {
+      method: "POST",
+      body: JSON.stringify(_bookInstance),
+    }
+  );
+  return data;
+};
+
+export const updateBookInstanceDetailsById = async (
+  bookInstanceFormFieldValues: TBookInstanceFormFields
+) => {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/bookinstance`,
+    {
+      method: "PUT",
+      body: JSON.stringify({ ...bookInstanceFormFieldValues }),
+    }
+  );
   return data;
 };

@@ -38,3 +38,7 @@ export type TBookInstance = {
   status: "Available" | "Maintenance" | "Loaned" | "Reserved";
   due_back: string;
 };
+
+export type TBookInstanceFormFields = Omit<TBookInstance, "book"> & {
+  book: string;
+};

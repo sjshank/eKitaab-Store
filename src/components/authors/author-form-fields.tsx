@@ -1,11 +1,28 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TextFieldProps } from "@mui/material";
+import { DatePicker, DatePickerProps } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { FormikProps } from "formik";
 
-const AuthorFieldProps = {
+const CommonDatePickerProps: Partial<DatePickerProps<any>> = {
+  autoFocus: false,
+  formatDensity: "spacious",
+  reduceAnimations: true,
+  sx: { my: 2 },
+  disableFuture: true,
+};
+
+const CommonTextFieldProps: Partial<TextFieldProps> = {
+  fullWidth: true,
+  variant: "outlined",
+  margin: "dense",
+  sx: { my: 2 },
+};
+
+const AuthorFieldProps: any = {
   firstName: {
+    ...CommonTextFieldProps,
     id: "first_name",
     name: "first_name",
     label: "First Name",
@@ -13,6 +30,7 @@ const AuthorFieldProps = {
     required: true,
   },
   familyName: {
+    ...CommonTextFieldProps,
     id: "family_name",
     name: "family_name",
     label: "Family Name",
@@ -24,11 +42,13 @@ const AuthorFieldProps = {
     id: "date_of_birth",
     name: "date_of_birth",
     label: "Date Of Birth (optional)",
+    maxDate: dayjs().subtract(5, "years"),
   },
   dateOfDeath: {
     id: "date_of_death",
     name: "date_of_death",
     label: "Date Of Death (optional)",
+    maxDate: dayjs().subtract(1, "day"),
   },
 };
 
@@ -43,10 +63,6 @@ const AuthorFormFields = ({
   <>
     <TextField
       {...AuthorFieldProps.firstName}
-      fullWidth
-      variant="outlined"
-      margin="dense"
-      sx={{ my: 2 }}
       value={values[AuthorFieldProps.firstName.name]}
       onChange={handleChange}
       onBlur={handleBlur}
@@ -57,14 +73,9 @@ const AuthorFormFields = ({
       error={
         Boolean(errors[AuthorFieldProps.firstName.name]) &&
         touched[AuthorFieldProps.firstName.name]
-      }
-      required></TextField>
+      }></TextField>
     <TextField
       {...AuthorFieldProps.familyName}
-      fullWidth
-      variant="outlined"
-      margin="dense"
-      sx={{ my: 2 }}
       value={values[AuthorFieldProps.familyName.name]}
       onChange={handleChange}
       onBlur={handleBlur}
@@ -77,13 +88,9 @@ const AuthorFormFields = ({
         touched[AuthorFieldProps.familyName.name]
       }></TextField>
     <DatePicker
+      {...CommonDatePickerProps}
       {...AuthorFieldProps.dateOfBirth}
-      sx={{ my: 2 }}
-      autoFocus={false}
-      reduceAnimations={true}
-      formatDensity="spacious"
       value={dayjs(values.date_of_birth)}
-      maxDate={dayjs().subtract(5, "years")}
       onChange={(value) =>
         value ??
         setFieldValue("date_of_birth", dayjs(value).toISOString(), true)
@@ -94,16 +101,11 @@ const AuthorFormFields = ({
           helperText: touched.date_of_birth && errors.date_of_birth,
         },
       }}
-      disableFuture
     />
     <DatePicker
+      {...CommonDatePickerProps}
       {...AuthorFieldProps.dateOfDeath}
-      sx={{ my: 2 }}
-      autoFocus={false}
-      reduceAnimations={true}
-      formatDensity="spacious"
       // value={dayjs(values.date_of_death)}
-      maxDate={dayjs().subtract(1, "day")}
       onChange={(value) =>
         value ??
         setFieldValue("date_of_death", dayjs(value).toISOString(), true)
@@ -114,7 +116,6 @@ const AuthorFormFields = ({
           helperText: touched.date_of_death && errors.date_of_death,
         },
       }}
-      disableFuture
     />
   </>
 );

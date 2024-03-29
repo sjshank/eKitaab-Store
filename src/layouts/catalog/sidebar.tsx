@@ -19,7 +19,7 @@ const SideBar = () => {
           onClick={() => router.push(nav.path)}
           disableRipple
           disableTouchRipple
-          sx={{ mb: 1, padding: 0.5, maxWidth: "90%" }}
+          sx={{ mb: 1, padding: 0.5, maxWidth: "80%" }}
           selected={selected}>
           {selected && (
             <ListItemIcon sx={{ minWidth: "auto", mr: 1 }}>

@@ -1,16 +1,14 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { FormikProps } from "formik";
 import { withFormik } from "formik";
 import { TAuthor, TBookFormFields, TGenre } from "@/types/book";
 import FormLayout from "@/layouts/form";
 import { BookFormSchema } from "@/utils/yup-schema";
-import MenuItem from "@mui/material/MenuItem";
 import BookFormFields from "./book-form-fields";
 
 export type TBookFormProps = {
   book: TBookFormFields;
   onSubmit: (bookFormFieldValues: TBookFormFields) => void;
-  buttonLbl?: string;
   authors: TAuthor[];
   genres: TGenre[];
 };

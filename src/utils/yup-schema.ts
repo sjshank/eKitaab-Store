@@ -33,3 +33,10 @@ export const BookFormSchema = Yup.object().shape({
   author: Yup.string().required("Required"),
   genre: Yup.array().min(1, "Required"),
 });
+
+export const BookInstanceFormSchema = Yup.object().shape({
+  book: Yup.string().required("Required"),
+  imprint: Yup.string().max(80, "Too Long!").required("Required"),
+  dueDate: Yup.date().optional(),
+  status: Yup.string().optional(),
+});
