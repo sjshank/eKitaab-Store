@@ -9,19 +9,21 @@ import { TGenre } from "@/types/book";
 import useFormLegends from "@/hooks/useFormLegends";
 import useInitialValues from "@/hooks/useInitialValues";
 
-const CreateGenre: NextPageWithLayout<{}> = () => {
+const CreateGenre: NextPageWithLayout<{}> = (): React.JSX.Element => {
   useFormLegends("Add New Genre", "Submit");
   const router = useRouter();
 
   const handleSubmitAction = useCallback(async (genre: TGenre) => {
     const response = await addNewGenre(genre.name);
-    if (response) {
+    if (response.status == 201) {
       router.push("/catalog/genres");
+    } else {
+      const message = await response.json();
     }
   }, []);
 
   const initialValues = useInitialValues({
-    genre: { _id: "", name: "" },
+    genre: {} as TGenre,
     onSubmit: handleSubmitAction,
   });
 

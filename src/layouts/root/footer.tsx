@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Link from "@mui/material/Link";
 
-const Footer = () => {
+const Footer: React.FunctionComponent<{}> = (): React.JSX.Element => {
   return (
     <Stack
       component="footer"

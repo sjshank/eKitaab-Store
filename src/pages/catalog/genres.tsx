@@ -19,7 +19,7 @@ const GenreList: NextPageWithLayout<{ genres: TGenre[] }> = ({
 };
 
 export const getStaticProps: GetStaticProps = (async () => {
-  const response = await retrieveAllRegisteredGenres();
+  const response = (await retrieveAllRegisteredGenres()) as TGenre[];
   return {
     props: {
       genres: response,

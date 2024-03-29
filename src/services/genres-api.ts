@@ -12,25 +12,34 @@ export const getGenreDetailsById = async (id: string) => {
 };
 
 export const addNewGenre = async (name: string) => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`, {
-    method: "POST",
-    body: JSON.stringify({ name: name }),
-  });
-  return data;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`,
+    {
+      method: "POST",
+      body: JSON.stringify({ name: "" }),
+    }
+  );
+  return response;
 };
 
 export const updateGenreById = async (genre: TGenre) => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`, {
-    method: "PUT",
-    body: JSON.stringify({ ...genre }),
-  });
-  return data;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`,
+    {
+      method: "PUT",
+      body: JSON.stringify({ ...genre }),
+    }
+  );
+  return response;
 };
 
 export const deleteGenreById = async (id: string) => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`, {
-    method: "DELETE",
-    body: id,
-  });
-  return data;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`,
+    {
+      method: "DELETE",
+      body: id,
+    }
+  );
+  return response;
 };

@@ -21,7 +21,7 @@ const AuthorList: NextPageWithLayout<{ authors: TAuthor[] }> = ({
 export const getStaticProps: GetStaticProps<{
   authors: TAuthor[];
 }> = async () => {
-  const response = await retrieveAllRegisteredAuthors();
+  const response = (await retrieveAllRegisteredAuthors()) as TAuthor[];
   return {
     props: {
       authors: response,

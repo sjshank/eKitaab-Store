@@ -6,11 +6,17 @@ import List from "@mui/material/List";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 
-// interface GenericListFn<Type> {
-//   (list: Type): Type;
-// }
+type TListData<T> = {
+  data: T;
+};
 
-const MuiConnectedList: React.FunctionComponent<any> = ({
+type TConnectedListProps = {
+  list: any[];
+  href: string;
+  titleIdentifierKey: string;
+};
+
+const MuiConnectedList: React.FunctionComponent<TConnectedListProps> = ({
   list,
   href,
   titleIdentifierKey,

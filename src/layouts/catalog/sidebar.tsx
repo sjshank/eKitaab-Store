@@ -7,11 +7,12 @@ import { useRouter } from "next/router";
 import { SIDEBAR_NAVIGATIONS } from "@/utils/constants";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import VerifiedRoundedIcon from "@mui/icons-material/VerifiedRounded";
+import { TChildrenNav, TNavigation } from "@/types/common-type";
 
-const SideBar = () => {
+const SideBar: React.FunctionComponent<{}> = (): React.JSX.Element => {
   const router = useRouter();
 
-  const NavContent = (nav: any) => {
+  const NavContent = (nav: TChildrenNav) => {
     const selected = router.pathname === nav.path;
     return (
       <ListItem disablePadding sx={{ pl: 1 }}>
@@ -40,24 +41,25 @@ const SideBar = () => {
   return (
     <nav>
       <List sx={{ width: "100%" }}>
-        {SIDEBAR_NAVIGATIONS.map((nav) => {
-          return (
-            <ListItem
-              key={nav.label}
-              disablePadding
-              disableGutters
-              sx={{ display: "list-item" }}>
-              <ListItemText secondary={nav.label} />
-              {nav.children.length > 0 && (
-                <List>
-                  {nav.children.map((childNav) => (
-                    <NavContent key={childNav.label} {...childNav} />
-                  ))}
-                </List>
-              )}
-            </ListItem>
-          );
-        })}
+        {SIDEBAR_NAVIGATIONS &&
+          SIDEBAR_NAVIGATIONS.map((nav: TNavigation<string, TChildrenNav>) => {
+            return (
+              <ListItem
+                key={nav.label}
+                disablePadding
+                disableGutters
+                sx={{ display: "list-item" }}>
+                <ListItemText secondary={nav.label} />
+                {nav.children.length > 0 && (
+                  <List>
+                    {nav.children.map((childNav) => (
+                      <NavContent key={childNav.label} {...childNav} />
+                    ))}
+                  </List>
+                )}
+              </ListItem>
+            );
+          })}
       </List>
     </nav>
   );

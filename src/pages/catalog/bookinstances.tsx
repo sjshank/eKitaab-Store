@@ -25,7 +25,8 @@ const BookInstanceList: NextPageWithLayout<{
 export const getStaticProps: GetStaticProps<{
   bookInstances: TBookInstance[];
 }> = async () => {
-  const response = await retrieveAllBookInstancesFromCatalog();
+  const response =
+    (await retrieveAllBookInstancesFromCatalog()) as TBookInstance[];
   return {
     props: {
       bookInstances: response,

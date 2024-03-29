@@ -51,9 +51,11 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
       const response = await updateBookInstanceDetailsById(
         bookInstanceFormFieldValues
       );
-      if (response) {
+      if (response.status == 202) {
         router.push(bookInstance._id);
         updateFormLegends({ ...formLegends, isEdit: false });
+      } else {
+        console.log(await response.json());
       }
     },
     []
@@ -81,7 +83,7 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
             <strong>BOOK DETAILS</strong>
           </Typography>
           <Box marginLeft={1}>
-            <BookDetailSummary {...book} />
+            <BookDetailSummary book={book} />
           </Box>
         </>
       )}

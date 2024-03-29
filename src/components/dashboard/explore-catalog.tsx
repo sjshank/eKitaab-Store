@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
 import Typography from "@mui/material/Typography";
 
-const ExploreCatalog = () => {
+const ExploreCatalog: React.FunctionComponent<{}> = (): React.JSX.Element => {
   return (
     <Box padding={2} marginTop={4} display="flex" justifyContent="center">
       <Link

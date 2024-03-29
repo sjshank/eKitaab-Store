@@ -10,7 +10,6 @@ import AuthorFormFields from "./author-form-fields";
 export type TAuthorFormProps = {
   author: TAuthor;
   onSubmit: (author: TAuthor) => void;
-  buttonLbl?: string;
 };
 
 const ConnectedForm = (props: TAuthorFormProps & FormikProps<TAuthor>) => {

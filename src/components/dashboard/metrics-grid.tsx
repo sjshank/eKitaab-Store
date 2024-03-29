@@ -5,8 +5,6 @@ import MetricsGridItem from "./metrics-grid-item";
 
 const MetricsGrid: React.FunctionComponent<{ dashboard: TDashboardData[] }> = ({
   dashboard,
-}: {
-  dashboard: TDashboardData[];
 }) => {
   return (
     <Grid

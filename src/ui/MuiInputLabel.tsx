@@ -1,5 +1,6 @@
 import { styled } from "@mui/material";
 import InputLabel, { InputLabelProps } from "@mui/material/InputLabel";
+import React from "react";
 
 const CustomizedInputLabel = styled(InputLabel)<InputLabelProps>(
   ({ theme }) => ({
@@ -9,7 +10,9 @@ const CustomizedInputLabel = styled(InputLabel)<InputLabelProps>(
   })
 );
 
-const MuiInputLabel = (inputLabelProps: InputLabelProps) => {
+const MuiInputLabel: React.FunctionComponent<InputLabelProps> = (
+  inputLabelProps: InputLabelProps
+): React.JSX.Element => {
   return (
     <CustomizedInputLabel {...inputLabelProps}>
       {inputLabelProps.children}

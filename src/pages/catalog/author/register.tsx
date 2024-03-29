@@ -15,18 +15,14 @@ const RegisterAuthor: NextPageWithLayout<{}> = () => {
 
   const handleSubmitAction = useCallback(async (author: TAuthor) => {
     const response = await registerNewAuthor(author);
-    if (response) {
+    if (response.status == 201) {
       router.push("/catalog/authors");
+    } else {
+      console.log(await response.json());
     }
   }, []);
   const initialValues = useInitialValues({
-    author: {
-      _id: "",
-      date_of_birth: "",
-      date_of_death: "",
-      family_name: "",
-      first_name: "",
-    },
+    author: {} as TAuthor,
     onSubmit: handleSubmitAction,
   });
 

@@ -2,7 +2,10 @@ import { FormContext, TFormContext } from "@/context/form-context";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 
-const usePerformDelete = (actionName: () => Promise<any>, route: string) => {
+const usePerformDelete = (
+  actionName: (args?: any[]) => Promise<Response>,
+  route: string
+) => {
   const router = useRouter();
   const { formLegends, updateFormLegends } =
     useContext<TFormContext>(FormContext);

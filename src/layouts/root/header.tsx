@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import LocalLibraryRoundedIcon from "@mui/icons-material/LocalLibraryRounded";
 
-const Header = () => {
+const Header: React.FunctionComponent<{}> = (): React.JSX.Element => {
   return (
     <Stack
       marginTop={4}

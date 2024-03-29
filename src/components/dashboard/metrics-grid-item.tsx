@@ -9,7 +9,7 @@ import CustomizedCard, { MetricIcons } from "./metric-card";
 const MetricsGridItem: React.FunctionComponent<TDashboardData> = ({
   label,
   count,
-}: TDashboardData) => {
+}) => {
   const metricCardContent = () => {
     const IconComponent: React.JSX.Element = MetricIcons[label];
 

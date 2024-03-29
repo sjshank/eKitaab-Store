@@ -21,14 +21,11 @@ const MuiModal: React.FunctionComponent<TModalProps> = ({
   onConfirm,
   children,
 }) => {
-  const handleClose = () => {
-    onClose();
-  };
   return (
     <React.Fragment>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={() => onClose()}
         aria-labelledby={`modal-dialog-${title}`}
         aria-describedby={`modal-dialog-confirmation`}>
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
@@ -45,7 +42,7 @@ const MuiModal: React.FunctionComponent<TModalProps> = ({
             autoFocus>
             Delete
           </Button>
-          <Button variant="outlined" color="inherit" onClick={handleClose}>
+          <Button variant="outlined" color="inherit" onClick={() => onClose()}>
             Cancel
           </Button>
         </DialogActions>

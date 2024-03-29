@@ -26,8 +26,10 @@ const RegisterBook: NextPageWithLayout<TRegisterBookProps> = ({
 
   const handleSubmitAction = async (bookFormFieldValues: TBookFormFields) => {
     const response = await registerNewBook(bookFormFieldValues);
-    if (response) {
+    if (response.status == 201) {
       router.push("/catalog/books");
+    } else {
+      console.log(await response.json());
     }
   };
 

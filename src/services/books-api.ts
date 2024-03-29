@@ -10,7 +10,7 @@ export const retrieveAllBooksFromCatalog = async () => {
   return data;
 };
 
-export const getBookDetailsById = async (id: any) => {
+export const getBookDetailsById = async (id: string) => {
   const data = await callApiEndpoint(`catalog/book/${id}`);
   return data;
 };
@@ -53,7 +53,7 @@ export const retrieveAllBookInstancesFromCatalog = async () => {
   return data;
 };
 
-export const getBookInstanceDetailsById = async (id: any) => {
+export const getBookInstanceDetailsById = async (id: string) => {
   const data = await callApiEndpoint(`catalog/bookinstance/${id}`);
   return data;
 };

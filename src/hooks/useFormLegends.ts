@@ -1,5 +1,5 @@
 import { FormContext, TFormContext } from "@/context/form-context";
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 const useFormLegends = (formTitle: string, ctaLabel: string) => {
   const { formLegends, updateFormLegends } =
@@ -11,7 +11,7 @@ const useFormLegends = (formTitle: string, ctaLabel: string) => {
       formTitle: formTitle,
       ctaLabel: ctaLabel,
     });
-  }, []);
+  }, [formLegends.isEdit]);
 };
 
 export default useFormLegends;

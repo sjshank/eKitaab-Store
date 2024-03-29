@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 
 const Header: React.FunctionComponent<{ subHeader?: string }> = ({
   subHeader,
-}) => {
+}): React.JSX.Element => {
   return (
     <>
       {subHeader && (

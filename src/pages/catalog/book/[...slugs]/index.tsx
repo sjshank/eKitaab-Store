@@ -46,17 +46,20 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
   usePerformDelete(deleteBookById.bind(null, book._id), "books");
 
   const router = useRouter();
-  const { formLegends, updateFormLegends } =
-    useContext<TFormContext>(FormContext);
+  const { formLegends } = useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
 
-  const handleSubmitAction = useCallback(async (book: TBookFormFields) => {
-    const response = await updateBookDetailsById(book);
-    if (response) {
-      router.push(book._id);
-      updateFormLegends({ ...formLegends, isEdit: false });
-    }
-  }, []);
+  const handleSubmitAction = useCallback(
+    async (book: TBookFormFields) => {
+      const response = await updateBookDetailsById(book);
+      if (response.status == 202) {
+        router.push(book._id);
+      } else {
+        console.log(await response.json());
+      }
+    },
+    [book]
+  );
 
   const initialValues = useInitialValues({
     book: {
@@ -73,7 +76,7 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
     <Stack>
       {!isEdit && (
         <>
-          <BookDetailSummary {...book} />
+          <BookDetailSummary book={book} />
           <BookCopies copies={copies} />
         </>
       )}

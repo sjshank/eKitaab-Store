@@ -49,7 +49,7 @@ const MuiTableContainer: React.FunctionComponent<TTableProps> = ({
   headers = [],
   hasRecords = false,
   children = null,
-}: TTableProps): React.JSX.Element => {
+}): React.JSX.Element => {
   return (
     <TableContainer component={CustomizedTableContainer}>
       <Typography

@@ -8,11 +8,17 @@ import { FormContext, TFormContext } from "@/context/form-context";
 import { useRouter } from "next/router";
 import MuiModal from "@/ui/MuiModal";
 
+type TProps<T> = {
+  children: React.ReactNode;
+  // Additional props that the HOC provides
+  title: string;
+};
+
 const WithDetailLayoutWrapper = (
   WrapperComponent: React.ElementType,
   wrapperProps?: any
 ): React.ElementType => {
-  const PageWithDetailLayout = (props: any) => {
+  const PageWithDetailLayout: React.FunctionComponent<TProps<{}>> = (props) => {
     const [showDeleteModal, setDeleteModal] = useState<boolean>(false);
     const router = useRouter();
     const { formLegends, updateFormLegends } =

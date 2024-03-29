@@ -38,13 +38,18 @@ const GenreDetail: NextPageWithLayout<TGenreDetail> = ({
     useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
 
-  const handleSubmitAction = useCallback(async (genre: TGenre) => {
-    const response = await updateGenreById(genre);
-    if (response) {
-      router.push(genre._id);
-      updateFormLegends({ ...formLegends, isEdit: false });
-    }
-  }, []);
+  const handleSubmitAction = useCallback(
+    async (genre: TGenre) => {
+      const response = await updateGenreById(genre);
+      if (response.status == 202) {
+        router.push(genre._id);
+        updateFormLegends({ ...formLegends, isEdit: false });
+      } else {
+        console.log(await response.json());
+      }
+    },
+    [genre.name]
+  );
 
   const initialValues = useInitialValues({
     genre: { ...genre },
@@ -70,6 +75,7 @@ export const getStaticProps: GetStaticProps = (async (context) => {
       books,
       title: genre.name,
     },
+    revalidate: 1,
   };
 }) as GetStaticProps<TGenreDetail>;
 

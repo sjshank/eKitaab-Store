@@ -1,19 +1,28 @@
-export const BOOK_COPIES_TABLE_HEADER = ["Id", "Status", "Imprint", "Due Date"];
-export const BOOKS_TABLE_HEADER = ["Title", "Summary"];
-export const BOOK_INSTANCE_STATUS = [
+import { TChildrenNav, TNavigation } from "@/types/common-type";
+
+export const BOOK_COPIES_TABLE_HEADER: string[] = [
+  "Id",
+  "Status",
+  "Imprint",
+  "Due Date",
+];
+export const BOOKS_TABLE_HEADER: string[] = ["Title", "Summary"];
+
+export const BOOK_INSTANCE_STATUS: string[] = [
   "Available",
   "Loaned",
   "Maintenance",
   "Reserved",
 ];
-export const STATUS_IDENTITY_MAP = Object.seal({
+
+export const STATUS_IDENTITY_MAP: { [key: string]: string } = Object.seal({
   Available: "#83ce1a",
   Maintenance: "#E3651D",
   Loaned: "#711DB0",
   Reserved: "#7D7C7C",
 });
 
-export const SIDEBAR_NAVIGATIONS = [
+export const SIDEBAR_NAVIGATIONS: TNavigation<string, TChildrenNav>[] = [
   {
     label: "Home",
     children: [

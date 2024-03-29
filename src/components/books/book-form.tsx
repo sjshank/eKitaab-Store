@@ -40,7 +40,6 @@ const BookForm = withFormik<TBookFormProps, TBookFormFields>({
 
   handleSubmit: (values, formikBag) => {
     const { props, setSubmitting } = formikBag;
-    // console.log(values);
     props.onSubmit(values);
     setSubmitting(false);
   },

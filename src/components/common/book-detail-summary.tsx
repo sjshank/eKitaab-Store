@@ -5,9 +5,9 @@ import NextLink from "next/link";
 import Link from "@mui/material/Link";
 import MuiSummaryItem from "@/ui/MuiSummaryItem";
 
-const BookDetailSummary: React.FunctionComponent<TBook> = (
-  book: TBook
-): React.JSX.Element => {
+const BookDetailSummary: React.FunctionComponent<{ book: TBook }> = ({
+  book,
+}): React.JSX.Element => {
   return (
     <List>
       <MuiSummaryItem label="Author">

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FormikProps, Form } from "formik";
+import { FormikProps, Form, FormikValues } from "formik";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -11,7 +11,7 @@ import SaveAltRoundedIcon from "@mui/icons-material/SaveAltRounded";
 
 type TFormProps = {
   children?: React.ReactNode;
-  formikProps: FormikProps<any> & any;
+  formikProps: FormikProps<FormikValues> & any;
 };
 
 const FormLayout: React.FunctionComponent<TFormProps> = ({

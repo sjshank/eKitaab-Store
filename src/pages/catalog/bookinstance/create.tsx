@@ -3,7 +3,7 @@ import { NextPageWithLayout } from "@/layouts/root";
 import React, { useCallback } from "react";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/router";
-import { TBook, TBookInstanceFormFields } from "@/types/book";
+import { TBook, TBookInstance, TBookInstanceFormFields } from "@/types/book";
 import {
   createNewBookInstance,
   retrieveAllBooksFromCatalog,
@@ -28,20 +28,16 @@ const CreateBookInstance: NextPageWithLayout<TRegisterBookProps> = ({
   const handleSubmitAction = useCallback(
     async (bookInstanceFormFieldValues: TBookInstanceFormFields) => {
       const response = await createNewBookInstance(bookInstanceFormFieldValues);
-      if (response) {
+      if (response.status == 201) {
         router.push("/catalog/bookinstances");
+      } else {
+        console.log(await response.json());
       }
     },
     []
   );
   const initialValues = useInitialValues({
-    bookInstance: {
-      _id: "",
-      book: "",
-      due_back: "",
-      status: "Available",
-      imprint: "",
-    },
+    bookInstance: {} as TBookInstance,
     onSubmit: handleSubmitAction,
     books: books,
   });

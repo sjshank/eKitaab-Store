@@ -52,14 +52,14 @@ const AuthorFieldProps: any = {
   },
 };
 
-const AuthorFormFields = ({
+const AuthorFormFields: React.FunctionComponent<FormikProps<any> & any> = ({
   values,
   handleChange,
   handleBlur,
   touched,
   errors,
   setFieldValue,
-}: FormikProps<any> & any) => (
+}) => (
   <>
     <TextField
       {...AuthorFieldProps.firstName}

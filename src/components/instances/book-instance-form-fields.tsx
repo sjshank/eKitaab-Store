@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { TextFieldProps } from "@mui/material";
 import { DatePicker, DatePickerProps } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import { FormikProps } from "formik";
+import { FormikProps, FormikValues } from "formik";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -28,7 +28,7 @@ const CommonDatePickerProps: Partial<DatePickerProps<any>> = {
   disableFuture: false,
 };
 
-const BookInstanceFieldProps: any = {
+const BookInstanceFieldProps = {
   book: {
     id: "book",
     name: "book",
@@ -62,7 +62,9 @@ const BookInstanceFieldProps: any = {
   },
 };
 
-const BookInstanceFormFields = ({
+const BookInstanceFormFields: React.FunctionComponent<
+  FormikProps<FormikValues> & any
+> = ({
   values,
   handleChange,
   handleBlur,
@@ -70,7 +72,7 @@ const BookInstanceFormFields = ({
   errors,
   setFieldValue,
   books,
-}: FormikProps<any> & any) => {
+}) => {
   const { formLegends } = useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
 

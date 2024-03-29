@@ -4,7 +4,7 @@ import Fab from "@mui/material/Fab";
 import { useRouter } from "next/router";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 
-const Footer = () => {
+const Footer: React.FunctionComponent<{}> = (): React.JSX.Element => {
   const router = useRouter();
   return (
     <Box component="footer">
