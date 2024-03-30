@@ -130,6 +130,7 @@ export const getServerSideProps: GetServerSideProps<TBookInstanceDetail> =
         book: book,
         title: `Instance Id : ${copy._id}`,
       },
+      revalidate: 10,
     };
   }) as GetServerSideProps<TBookInstanceDetail>;
 

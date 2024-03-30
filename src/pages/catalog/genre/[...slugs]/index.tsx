@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps = (async (context) => {
       books,
       title: genre.name,
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 }) as GetStaticProps<TGenreDetail>;
 

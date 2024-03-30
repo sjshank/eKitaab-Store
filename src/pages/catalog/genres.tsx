@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps = (async () => {
     props: {
       genres: response,
     },
-    revalidate: 30,
+    revalidate: 5,
   };
 }) satisfies GetStaticProps<{
   genres: TGenre[];

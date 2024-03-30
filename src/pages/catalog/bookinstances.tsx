@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps<{
     props: {
       bookInstances: response,
     },
-    revalidate: 30,
+    revalidate: 5,
   };
 };
 

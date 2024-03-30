@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps<{
     props: {
       authors: response,
     },
-    revalidate: 30,
+    revalidate: 5,
   };
 };
 
