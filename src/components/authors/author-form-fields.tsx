@@ -59,6 +59,7 @@ const AuthorFormFields: React.FunctionComponent<FormikProps<any> & any> = ({
   touched,
   errors,
   setFieldValue,
+  isSubmitting,
 }) => (
   <>
     <TextField
@@ -66,6 +67,7 @@ const AuthorFormFields: React.FunctionComponent<FormikProps<any> & any> = ({
       value={values[AuthorFieldProps.firstName.name]}
       onChange={handleChange}
       onBlur={handleBlur}
+      disabled={isSubmitting}
       helperText={
         touched[AuthorFieldProps.firstName.name] &&
         errors[AuthorFieldProps.firstName.name]
@@ -79,6 +81,7 @@ const AuthorFormFields: React.FunctionComponent<FormikProps<any> & any> = ({
       value={values[AuthorFieldProps.familyName.name]}
       onChange={handleChange}
       onBlur={handleBlur}
+      disabled={isSubmitting}
       helperText={
         touched[AuthorFieldProps.familyName.name] &&
         errors[AuthorFieldProps.familyName.name]
@@ -91,6 +94,7 @@ const AuthorFormFields: React.FunctionComponent<FormikProps<any> & any> = ({
       {...CommonDatePickerProps}
       {...AuthorFieldProps.dateOfBirth}
       value={dayjs(values.date_of_birth)}
+      disabled={isSubmitting}
       onChange={(value) =>
         value ??
         setFieldValue("date_of_birth", dayjs(value).toISOString(), true)
@@ -106,6 +110,7 @@ const AuthorFormFields: React.FunctionComponent<FormikProps<any> & any> = ({
       {...CommonDatePickerProps}
       {...AuthorFieldProps.dateOfDeath}
       // value={dayjs(values.date_of_death)}
+      disabled={isSubmitting}
       onChange={(value) =>
         value ??
         setFieldValue("date_of_death", dayjs(value).toISOString(), true)

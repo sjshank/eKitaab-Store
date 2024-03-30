@@ -1,4 +1,5 @@
 import { NextApiResponse } from "next";
+import { GENERIC_ERROR_MSG } from "./constants";
 
 const expression = /^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/;
 const URL_Pattern = new RegExp(expression);
@@ -12,8 +13,7 @@ export const parseError = (error: any, res: NextApiResponse<any>) => {
     res.status(500).json({ message: "Service is not available" });
   } else {
     res.status(res.statusCode).json({
-      message:
-        "We are facing some technical challenges. Please try after sometime.",
+      message: GENERIC_ERROR_MSG,
     });
   }
 };

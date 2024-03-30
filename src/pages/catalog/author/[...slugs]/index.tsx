@@ -19,9 +19,12 @@ import { FormContext, TFormContext } from "@/context/form-context";
 import useFormLegends from "@/hooks/useFormLegends";
 import usePerformDelete from "@/hooks/usePerformDelete";
 import useInitialValues from "@/hooks/useInitialValues";
+import MuiSkeleton from "@/ui/MuiSkeleton";
+import { AlertContext, TAlertContext } from "@/context/alert-context";
+import { RECORD_UPDATED_SUCCESS_MSG } from "@/utils/constants";
 
 type TAuthorDetail = {
-  author: TAuthor;
+  author: TAuthor | null;
   books: TBook[];
   title: string;
 };
@@ -32,23 +35,32 @@ const AuthorDetailPage: NextPageWithLayout<TAuthorDetail> = ({
   title,
 }: TAuthorDetail) => {
   useFormLegends("Update Author Details", "Update");
+  //@ts-ignore
   usePerformDelete(deleteAuthorById.bind(null, author._id), "authors");
 
   const router = useRouter();
   const { formLegends, updateFormLegends } =
     useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
+  const { updateAlert } = useContext<TAlertContext>(AlertContext);
 
   const handleSubmitAction = useCallback(
     async (author: TAuthor) => {
       const response = await updateAuthorDetailsById(author);
       if (response.status == 202) {
+        updateAlert({
+          show: true,
+          message: RECORD_UPDATED_SUCCESS_MSG,
+          type: "success",
+        });
         router.push(author._id);
         updateFormLegends({ ...formLegends, isEdit: false });
       } else {
-        console.log(await response.json());
+        const data = await response.json();
+        updateAlert({ show: true, message: data.message, type: "error" });
       }
     },
+    //@ts-ignore
     [author]
   );
 
@@ -59,8 +71,10 @@ const AuthorDetailPage: NextPageWithLayout<TAuthorDetail> = ({
 
   return (
     <Stack>
+      {!author ?? <MuiSkeleton />}
       {!isEdit && (
         <>
+          {/* @ts-ignore */}
           <AuthorDetailSummary {...author} />
           <BooksTable books={books} />
         </>

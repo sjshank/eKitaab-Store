@@ -72,6 +72,7 @@ const BookInstanceFormFields: React.FunctionComponent<
   errors,
   setFieldValue,
   books,
+  isSubmitting,
 }) => {
   const { formLegends } = useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
@@ -106,7 +107,7 @@ const BookInstanceFormFields: React.FunctionComponent<
           size="medium"
           required
           tabIndex={0}
-          disabled={isEdit}
+          disabled={isEdit || isSubmitting}
           color="primary"
           value={values[BookInstanceFieldProps.book.name]}
           onBlur={handleBlur}
@@ -127,6 +128,7 @@ const BookInstanceFormFields: React.FunctionComponent<
         value={values[BookInstanceFieldProps.imprint.name]}
         onChange={handleChange}
         onBlur={handleBlur}
+        disabled={isSubmitting}
         helperText={
           touched[BookInstanceFieldProps.imprint.name] &&
           errors[BookInstanceFieldProps.imprint.name]
@@ -140,6 +142,7 @@ const BookInstanceFormFields: React.FunctionComponent<
         {...CommonDatePickerProps}
         {...BookInstanceFieldProps.dueBack}
         value={dayjs(values.due_back)}
+        disabled={isSubmitting}
         onChange={(value) =>
           value ?? setFieldValue("due_back", dayjs(value).toISOString(), true)
         }
@@ -162,6 +165,7 @@ const BookInstanceFormFields: React.FunctionComponent<
           size="medium"
           required
           tabIndex={0}
+          disabled={isSubmitting}
           color="primary"
           value={values[BookInstanceFieldProps.status.name]}
           onBlur={handleBlur}

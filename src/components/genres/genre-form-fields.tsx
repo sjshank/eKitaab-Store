@@ -8,6 +8,7 @@ const GenreFormFields = ({
   handleBlur,
   touched,
   errors,
+  isSubmitting,
 }: FormikProps<any> & any) => (
   <>
     <TextField
@@ -18,6 +19,7 @@ const GenreFormFields = ({
       fullWidth
       variant="outlined"
       margin="dense"
+      disabled={isSubmitting}
       sx={{ my: 2 }}
       value={values.name}
       onChange={handleChange}

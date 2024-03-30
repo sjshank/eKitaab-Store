@@ -8,11 +8,13 @@ import { populateDashboardData } from "@/services/dashboard-api";
 import { TDashboardData } from "@/types/dashboard";
 import ExploreCatalog from "@/components/dashboard/explore-catalog";
 import dynamic from "next/dynamic";
+import MuiSkeleton from "@/ui/MuiSkeleton";
 
 const DashboardPage: NextPageWithLayout<{
   dashboard: TDashboardData[];
-}> = ({ dashboard }: { dashboard: TDashboardData[] }): React.JSX.Element => {
+}> = ({ dashboard }): React.JSX.Element => {
   let MetricsGridComponentLazy = null;
+
   if (dashboard.length > 0) {
     MetricsGridComponentLazy = dynamic(
       () => import("@/components/dashboard/metrics-grid"),
@@ -23,22 +25,25 @@ const DashboardPage: NextPageWithLayout<{
     );
   }
   return (
-    <Box component="section">
-      <Typography variant="h5" component="h2">
-        Library Dashboard
-      </Typography>
-      {MetricsGridComponentLazy && (
-        <MetricsGridComponentLazy dashboard={dashboard} />
-      )}
-      <ExploreCatalog />
-    </Box>
+    <>
+      <Box component="section">
+        <Typography variant="h5" component="h2">
+          Library Dashboard
+        </Typography>
+        {dashboard.length === 0 && <MuiSkeleton />}
+        {MetricsGridComponentLazy && (
+          <MetricsGridComponentLazy dashboard={dashboard} />
+        )}
+        <ExploreCatalog />
+      </Box>
+    </>
   );
 };
 
 export const getStaticProps: GetStaticProps<{
-  dashboard: TDashboardData;
+  dashboard: TDashboardData[];
 }> = async () => {
-  const dashboardData = (await populateDashboardData()) as TDashboardData;
+  const dashboardData = (await populateDashboardData()) as TDashboardData[];
   return {
     props: {
       dashboard: dashboardData,

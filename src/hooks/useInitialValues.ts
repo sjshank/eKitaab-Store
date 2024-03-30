@@ -5,7 +5,7 @@ const useInitialValues = (init: any) => {
     () => ({
       ...init,
     }),
-    []
+    [init]
   );
   return initialValues;
 };

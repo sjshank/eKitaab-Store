@@ -28,9 +28,10 @@ import usePerformDelete from "@/hooks/usePerformDelete";
 import useInitialValues from "@/hooks/useInitialValues";
 import { RECORD_UPDATED_SUCCESS_MSG } from "@/utils/constants";
 import { AlertContext, TAlertContext } from "@/context/alert-context";
+import MuiSkeleton from "@/ui/MuiSkeleton";
 
 type TBookDetail = {
-  book: TBook;
+  book: TBook | null;
   authors: TAuthor[];
   genres: TGenre[];
   copies: TBookInstance[];
@@ -38,13 +39,14 @@ type TBookDetail = {
 };
 
 const BookDetail: NextPageWithLayout<TBookDetail> = ({
-  book,
-  copies,
+  book = null,
+  copies = [],
   title,
   authors,
-  genres,
+  genres = [],
 }: TBookDetail) => {
   useFormLegends("Update Book Details", "Update");
+  //@ts-ignore
   usePerformDelete(deleteBookById.bind(null, book._id), "books");
 
   const router = useRouter();
@@ -69,23 +71,28 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
         updateAlert({ show: true, message: data.message, type: "error" });
       }
     },
+    //@ts-ignore
     [book.author, book.genre, book.isbn, book.summary, book.title]
   );
 
   const initialValues = useInitialValues({
     book: {
       ...book,
+      //@ts-ignore
       genre: book.genre.map((g) => g._id),
+      //@ts-ignore
       author: book.author._id,
     },
     onSubmit: handleSubmitAction,
     authors: authors,
     genres: genres,
   });
+  const isDataAvailable = !book || authors.length === 0 || genres.length === 0;
 
   return (
     <Stack>
-      {!isEdit && (
+      {!isDataAvailable ?? <MuiSkeleton />}
+      {book && copies && !isEdit && (
         <>
           <BookDetailSummary book={book} />
           <BookCopies copies={copies} />

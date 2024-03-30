@@ -56,6 +56,7 @@ const BookFormFields = ({
   errors,
   authors,
   genres,
+  isSubmitting,
 }: FormikProps<any> & any) => {
   const authorOptions = useMemo(
     () =>
@@ -83,6 +84,7 @@ const BookFormFields = ({
         {...BookFieldProps.title}
         fullWidth
         variant="outlined"
+        disabled={isSubmitting}
         margin="dense"
         sx={{ my: 2 }}
         value={values[BookFieldProps.title.name]}
@@ -101,6 +103,7 @@ const BookFormFields = ({
         {...BookFieldProps.summary}
         fullWidth
         variant="outlined"
+        disabled={isSubmitting}
         margin="dense"
         sx={{ my: 2 }}
         value={values[BookFieldProps.summary.name]}
@@ -118,6 +121,7 @@ const BookFormFields = ({
         {...BookFieldProps.isbn}
         fullWidth
         variant="outlined"
+        disabled={isSubmitting}
         margin="dense"
         sx={{ my: 2 }}
         value={values[BookFieldProps.isbn.name]}
@@ -139,6 +143,7 @@ const BookFormFields = ({
           {...BookFieldProps.author}
           size="medium"
           required
+          disabled={isSubmitting}
           tabIndex={0}
           color="primary"
           value={values[BookFieldProps.author.name]}
@@ -164,6 +169,7 @@ const BookFormFields = ({
           {...BookFieldProps.genres}
           size="medium"
           required
+          disabled={isSubmitting}
           tabIndex={0}
           color="primary"
           multiple

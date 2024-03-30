@@ -47,7 +47,7 @@ const FormLayout: React.FunctionComponent<TFormProps> = ({
             sx={{ minWidth: "125px" }}
             aria-label="submit">
             <SaveAltRoundedIcon fontSize="small" sx={{ mr: 1 }} />
-            {ctaLabel}
+            {isSubmitting ? "Processing..." : ctaLabel}
           </Fab>
           <Fab
             variant="extended"

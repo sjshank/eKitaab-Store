@@ -20,19 +20,21 @@ import usePerformDelete from "@/hooks/usePerformDelete";
 import useInitialValues from "@/hooks/useInitialValues";
 import { AlertContext, TAlertContext } from "@/context/alert-context";
 import { RECORD_UPDATED_SUCCESS_MSG } from "@/utils/constants";
+import MuiSkeleton from "@/ui/MuiSkeleton";
 
 type TGenreDetail = {
-  genre: TGenre;
+  genre: TGenre | null;
   books: TBook[];
   title: string;
 };
 
 const GenreDetail: NextPageWithLayout<TGenreDetail> = ({
-  genre,
-  books,
+  genre = null,
+  books = [],
   title,
 }: TGenreDetail): React.JSX.Element => {
   useFormLegends("Update Genre", "Update");
+  //@ts-ignore
   usePerformDelete(deleteGenreById.bind(null, genre._id), "genres");
 
   const router = useRouter();
@@ -57,6 +59,7 @@ const GenreDetail: NextPageWithLayout<TGenreDetail> = ({
         updateAlert({ show: true, message: data.message, type: "error" });
       }
     },
+    //@ts-ignore
     [genre.name]
   );
 
@@ -67,8 +70,9 @@ const GenreDetail: NextPageWithLayout<TGenreDetail> = ({
 
   return (
     <Stack>
-      {!isEdit && <BooksTable books={books} />}
-      {isEdit && <GenreForm {...initialValues} />}
+      {(!genre || books.length === 0) ?? <MuiSkeleton />}
+      {genre && !isEdit && <BooksTable books={books} />}
+      {genre && isEdit && <GenreForm {...initialValues} />}
     </Stack>
   );
 };

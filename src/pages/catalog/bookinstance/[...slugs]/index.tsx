@@ -23,22 +23,24 @@ import usePerformDelete from "@/hooks/usePerformDelete";
 import useInitialValues from "@/hooks/useInitialValues";
 import { AlertContext, TAlertContext } from "@/context/alert-context";
 import { RECORD_UPDATED_SUCCESS_MSG } from "@/utils/constants";
+import MuiSkeleton from "@/ui/MuiSkeleton";
 
 type TBookInstanceDetail = {
-  bookInstance: TBookInstance;
+  bookInstance: TBookInstance | null;
   books: TBook[];
   title: string;
   book: TBook;
 };
 
 const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
-  bookInstance,
-  books,
+  bookInstance = null,
+  books = [],
   title,
   book,
 }: TBookInstanceDetail) => {
   useFormLegends("Update Book Instance Details", "Update");
   usePerformDelete(
+    //@ts-ignore
     deleteBookInstanceById.bind(null, bookInstance._id),
     "bookinstances"
   );
@@ -60,6 +62,7 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
           message: RECORD_UPDATED_SUCCESS_MSG,
           type: "success",
         });
+        //@ts-ignore
         router.push(bookInstance._id);
         updateFormLegends({ ...formLegends, isEdit: false });
       } else {
@@ -67,6 +70,7 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
         updateAlert({ show: true, message: data.message, type: "error" });
       }
     },
+    //@ts-ignore
     [bookInstance.due_back, bookInstance.imprint, bookInstance.status]
   );
 
@@ -81,8 +85,10 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
 
   return (
     <Stack>
-      {!isEdit && (
+      {(!bookInstance || books.length === 0) ?? <MuiSkeleton />}
+      {bookInstance && !isEdit && (
         <>
+          {/*//@ts-ignore*/}
           <BookInstanceSummary {...bookInstance} />
           <Typography
             variant="subtitle2"
@@ -96,7 +102,7 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
           </Box>
         </>
       )}
-      {isEdit && <BookInstanceForm {...initialValues} />}
+      {bookInstance && isEdit && <BookInstanceForm {...initialValues} />}
     </Stack>
   );
 };
