@@ -9,12 +9,11 @@ export default async function handler(
   res: NextApiResponse<TGenre & { message: string }>
 ) {
   try {
-    const { method } = req;
+    const { body, method } = req;
     if (method === "POST") {
-      const { body } = req;
       const genre = JSON.parse(body);
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/create`,
+        `/catalog/genre/create`,
         {
           method: "POST",
           body: JSON.stringify(genre),
@@ -24,11 +23,9 @@ export default async function handler(
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "PUT") {
-      const { body } = req;
-      console.log(body);
       const genre = JSON.parse(body);
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/${genre._id}/update`,
+        `/catalog/genre/${genre._id}/update`,
         {
           method: "PUT",
           body: JSON.stringify(genre),
@@ -39,11 +36,10 @@ export default async function handler(
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "DELETE") {
-      const { body } = req;
       const genre = JSON.parse(body);
       const { _id } = genre;
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/${_id}/delete`,
+        `/catalog/genre/${_id}/delete`,
         {
           method: "DELETE",
         }
@@ -52,13 +48,7 @@ export default async function handler(
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "GET") {
-      console.log("inside Get");
-      const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/genres`,
-        {
-          method: "GET",
-        }
-      );
+      const [fetchUrl, fetchOptions] = prepareApiEndpoint(`/catalog/genres`);
       const response = await fetch(fetchUrl, fetchOptions);
       const data = await parseResponse(response);
       res.status(response.status).json(data);

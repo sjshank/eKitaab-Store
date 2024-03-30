@@ -2,7 +2,7 @@ import { callApiEndpoint } from "@/lib/api";
 import { TAuthor } from "@/types/book";
 
 export const retrieveAllRegisteredAuthors = async () => {
-  let data = (await callApiEndpoint(`catalog/authors`)) as TAuthor[];
+  let data = (await callApiEndpoint(`/catalog/authors`)) as TAuthor[];
   data = data.map((d: TAuthor) => ({
     ...d,
     fullName: `${d.first_name}, ${d.family_name}`,
@@ -11,14 +11,14 @@ export const retrieveAllRegisteredAuthors = async () => {
 };
 
 export const getAuthorDetailsById = async (id: string) => {
-  const data = await callApiEndpoint(`catalog/author/${id}`);
+  const data = await callApiEndpoint(`/catalog/author/${id}`);
   return data;
 };
 
 export const registerNewAuthor = async (author: TAuthor) => {
-  const data = await callApiEndpoint(`/api/author`, {
+  const data = await fetch(`/api/author`, {
     method: "POST",
-    body: JSON.stringify(author),
+    body: JSON.stringify({ ...author }),
   });
   return data;
 };
@@ -34,7 +34,7 @@ export const updateAuthorDetailsById = async (author: TAuthor) => {
 export const deleteAuthorById = async (id: string) => {
   const data = await fetch(`/api/author`, {
     method: "DELETE",
-    body: id,
+    body: JSON.stringify({ _id: id }),
   });
   return data;
 };
