@@ -128,7 +128,7 @@ export const getServerSideProps: GetServerSideProps<TBookDetail> = (async (
       genres,
       title: book.title,
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 }) as GetServerSideProps<TBookDetail>;
 
