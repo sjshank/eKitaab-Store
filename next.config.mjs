@@ -12,7 +12,7 @@ const cspHeader = `
     script-src 'self' 'unsafe-eval' 'unsafe-inline';
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data:;
-    connect-src 'self' http://localhost:8080/;
+    connect-src 'self' http://localhost:8080/ https://local-library-api.onrender.com/;
     font-src 'self';
     object-src 'none';
     base-uri 'self';
