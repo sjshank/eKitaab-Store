@@ -73,7 +73,7 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
       }
     },
     //@ts-ignore
-    [book.author, book.genre, book.isbn, book.summary, book.title]
+    [book, formLegends, router]
   );
 
   const initialValues = useInitialValues({

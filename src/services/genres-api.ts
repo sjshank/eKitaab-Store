@@ -7,7 +7,6 @@ export const retrieveAllRegisteredGenres = async () => {
 };
 
 export const getGenreDetailsById = async (id: string) => {
-  console.log(id);
   const data = await callApiEndpoint(`catalog/genre/${id}`);
   return data;
 };

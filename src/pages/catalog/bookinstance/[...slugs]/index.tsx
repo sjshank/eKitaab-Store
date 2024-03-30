@@ -75,7 +75,7 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
       }
     },
     //@ts-ignore
-    [bookInstance.due_back, bookInstance.imprint, bookInstance.status]
+    [bookInstance, formLegends]
   );
 
   const initialValues = useInitialValues({

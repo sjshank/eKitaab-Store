@@ -94,7 +94,7 @@ const BookInstanceFormFields: React.FunctionComponent<
           {status}
         </MenuItem>
       )),
-    [BOOK_INSTANCE_STATUS]
+    []
   );
   return (
     <>

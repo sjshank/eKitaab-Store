@@ -61,7 +61,7 @@ const GenreDetail: NextPageWithLayout<TGenreDetail> = ({
       }
     },
     //@ts-ignore
-    [genre.name]
+    [genre.name, formLegends, router]
   );
 
   const initialValues = useInitialValues({

@@ -45,7 +45,7 @@ const CreateBookInstance: NextPageWithLayout<TRegisterBookProps> = ({
         updateAlert({ show: true, message: data.message, type: "error" });
       }
     },
-    []
+    [router]
   );
   const initialValues = useInitialValues({
     bookInstance: {} as TBookInstance,

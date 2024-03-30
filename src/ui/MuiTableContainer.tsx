@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 import { styled, TableCellProps, PaperProps } from "@mui/material";
 
 export const CustomizedTabHeaderCell = styled(TableCell)<TableCellProps>(
-  ({ theme }) => ({
+  () => ({
     "&.MuiTableCell-root": {
       padding: "8px",
       width: "15%",
@@ -18,24 +18,20 @@ export const CustomizedTabHeaderCell = styled(TableCell)<TableCellProps>(
   })
 );
 
-export const CustomizedTabBodyCell = styled(TableCell)<TableCellProps>(
-  ({ theme }) => ({
-    "&.MuiTableCell-root": {
-      padding: "8px",
-      fontSize: "0.9rem",
-      width: "15%",
-    },
-  })
-);
+export const CustomizedTabBodyCell = styled(TableCell)<TableCellProps>(() => ({
+  "&.MuiTableCell-root": {
+    padding: "8px",
+    fontSize: "0.9rem",
+    width: "15%",
+  },
+}));
 
-export const CustomizedTableContainer = styled(Paper)<PaperProps>(
-  ({ theme }) => ({
-    "&.MuiPaper-root": {
-      backgroundImage: "linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)",
-      marginTop: "15px",
-    },
-  })
-);
+export const CustomizedTableContainer = styled(Paper)<PaperProps>(() => ({
+  "&.MuiPaper-root": {
+    backgroundImage: "linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)",
+    marginTop: "15px",
+  },
+}));
 
 type TTableProps = {
   title: string;

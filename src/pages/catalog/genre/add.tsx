@@ -32,7 +32,7 @@ const CreateGenre: NextPageWithLayout<{}> = (): React.JSX.Element => {
         updateAlert({ show: true, message: data.message, type: "error" });
       }
     },
-    [updateAlert]
+    [updateAlert, router]
   );
 
   const initialValues = useInitialValues({
