@@ -10,10 +10,8 @@ export default async function handler(
 ) {
   try {
     const { body, method } = req;
-    console.log(method);
     const genre = JSON.parse(body);
     if (method === "POST") {
-      console.log("inside POST");
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
         `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/create`,
         {
