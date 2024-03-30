@@ -26,6 +26,8 @@ import BookForm from "@/components/books/book-form";
 import useFormLegends from "@/hooks/useFormLegends";
 import usePerformDelete from "@/hooks/usePerformDelete";
 import useInitialValues from "@/hooks/useInitialValues";
+import { RECORD_UPDATED_SUCCESS_MSG } from "@/utils/constants";
+import { AlertContext, TAlertContext } from "@/context/alert-context";
 
 type TBookDetail = {
   book: TBook;
@@ -49,15 +51,22 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
   const { formLegends, updateFormLegends } =
     useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
+  const { updateAlert } = useContext<TAlertContext>(AlertContext);
 
   const handleSubmitAction = useCallback(
     async (book: TBookFormFields) => {
       const response = await updateBookDetailsById(book);
       if (response.status == 202) {
+        updateAlert({
+          show: true,
+          message: RECORD_UPDATED_SUCCESS_MSG,
+          type: "success",
+        });
         router.push(book._id);
         updateFormLegends({ ...formLegends, isEdit: false });
       } else {
-        console.log(await response.json());
+        const data = await response.json();
+        updateAlert({ show: true, message: data.message, type: "error" });
       }
     },
     [book.author, book.genre, book.isbn, book.summary, book.title]

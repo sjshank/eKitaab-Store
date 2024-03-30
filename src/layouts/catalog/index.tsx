@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import withRootLayout from "@/hoc/withRootLayout";
 import { NextPageWithLayout } from "@/layouts/root";
 import Grid from "@mui/material/Grid";
@@ -7,6 +7,8 @@ import SideBar from "./sidebar";
 import Footer from "./footer";
 import Header from "./header";
 import FormContextProvider from "@/context/form-context";
+import { AlertContext, TAlertContext } from "@/context/alert-context";
+import MuiAlert from "@/ui/MuiAlert";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -17,6 +19,7 @@ const SecondaryLayout: NextPageWithLayout<LayoutProps> = ({
   children,
   subHeader,
 }): React.JSX.Element => {
+  const { alert } = useContext<TAlertContext>(AlertContext);
   return (
     <Box>
       <Grid container spacing={2} marginBottom={4}>
@@ -31,6 +34,7 @@ const SecondaryLayout: NextPageWithLayout<LayoutProps> = ({
         </Grid>
       </Grid>
       <Footer />
+      {alert?.show && <MuiAlert />}
     </Box>
   );
 };

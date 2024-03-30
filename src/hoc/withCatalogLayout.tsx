@@ -1,6 +1,7 @@
 import CatalogLayout from "@/layouts/catalog";
 import RootLayout from "@/layouts/root";
 import React, { ReactElement } from "react";
+import AlertContextProvider from "@/context/alert-context";
 
 const WithCatalogLayout = (
   WrapperComponent: React.ElementType,
@@ -8,9 +9,11 @@ const WithCatalogLayout = (
 ): React.ElementType => {
   const PageWithCatalogLayout = (props: any) => {
     return (
-      <CatalogLayout {...wrapperProps}>
-        <WrapperComponent {...props} />
-      </CatalogLayout>
+      <AlertContextProvider>
+        <CatalogLayout {...wrapperProps}>
+          <WrapperComponent {...props} />
+        </CatalogLayout>
+      </AlertContextProvider>
     );
   };
   PageWithCatalogLayout.getLayout = function (page: ReactElement) {

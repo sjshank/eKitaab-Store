@@ -24,6 +24,7 @@ const WithDetailLayoutWrapper = (
     const { formLegends, updateFormLegends } =
       useContext<TFormContext>(FormContext);
     const { isEdit } = formLegends;
+
     return (
       <Box component="article">
         {!isEdit && (

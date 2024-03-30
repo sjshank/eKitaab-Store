@@ -21,6 +21,8 @@ import Box from "@mui/material/Box";
 import useFormLegends from "@/hooks/useFormLegends";
 import usePerformDelete from "@/hooks/usePerformDelete";
 import useInitialValues from "@/hooks/useInitialValues";
+import { AlertContext, TAlertContext } from "@/context/alert-context";
+import { RECORD_UPDATED_SUCCESS_MSG } from "@/utils/constants";
 
 type TBookInstanceDetail = {
   bookInstance: TBookInstance;
@@ -45,6 +47,7 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
   const { formLegends, updateFormLegends } =
     useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
+  const { updateAlert } = useContext<TAlertContext>(AlertContext);
 
   const handleSubmitAction = useCallback(
     async (bookInstanceFormFieldValues: TBookInstanceFormFields) => {
@@ -52,10 +55,16 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
         bookInstanceFormFieldValues
       );
       if (response.status == 202) {
+        updateAlert({
+          show: true,
+          message: RECORD_UPDATED_SUCCESS_MSG,
+          type: "success",
+        });
         router.push(bookInstance._id);
         updateFormLegends({ ...formLegends, isEdit: false });
       } else {
-        console.log(await response.json());
+        const data = await response.json();
+        updateAlert({ show: true, message: data.message, type: "error" });
       }
     },
     [bookInstance.due_back, bookInstance.imprint, bookInstance.status]

@@ -85,3 +85,7 @@ export const SIDEBAR_NAVIGATIONS: TNavigation<string, TChildrenNav>[] = [
     ],
   },
 ];
+
+export const RECORD_SUCCESS_MSG = "Record created successfully.";
+export const RECORD_UPDATED_SUCCESS_MSG = "Record updated successfully.";
+export const RECORD_DELETED_SUCCESS_MSG = "Record deleted successfully.";

@@ -16,7 +16,7 @@ export const addNewGenre = async (name: string) => {
     `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`,
     {
       method: "POST",
-      body: JSON.stringify({ name: "" }),
+      body: JSON.stringify({ name: name }),
     }
   );
   return response;

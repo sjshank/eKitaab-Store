@@ -1,18 +1,23 @@
 import * as React from "react";
+import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { AlertContext, TAlertContext } from "@/context/alert-context";
 
-type TAlertProps = {
-  children: React.ReactNode;
-};
-
-const MuiAlert: React.FunctionComponent<TAlertProps> = ({ children }) => {
+const MuiAlert: React.FunctionComponent<{}> = () => {
+  const { alert } = React.useContext<TAlertContext>(AlertContext);
   return (
-    <Stack sx={{ width: "100%" }} spacing={2}>
-      <Alert variant="outlined" severity="info">
-        {children}
-      </Alert>
-    </Stack>
+    <>
+      {alert?.show && (
+        <Box component="div" id="snackbar" className={alert.show ? "show" : ""}>
+          <Stack sx={{ width: "100%" }} spacing={2}>
+            <Alert variant="filled" severity={alert.type}>
+              {alert?.message}
+            </Alert>
+          </Stack>
+        </Box>
+      )}
+    </>
   );
 };
 
