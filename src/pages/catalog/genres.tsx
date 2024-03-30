@@ -5,16 +5,31 @@ import MuiConnectedList from "@/ui/MuiConnectedList";
 import React from "react";
 import type { GetStaticProps } from "next";
 import { retrieveAllRegisteredGenres } from "@/services/genres-api";
+import dynamic from "next/dynamic";
+import MuiSkeleton from "@/ui/MuiSkeleton";
 
 const GenreList: NextPageWithLayout<{ genres: TGenre[] }> = ({
   genres,
 }): React.JSX.Element => {
+  let MuiConnectedListLazy = null;
+
+  if (genres.length > 0) {
+    MuiConnectedListLazy = dynamic(() => import("@/ui/MuiConnectedList"), {
+      loading: () => <MuiSkeleton />,
+      ssr: false,
+    });
+  }
+
   return (
-    <MuiConnectedList
-      list={genres}
-      href="/catalog/genre/"
-      titleIdentifierKey="name"
-    />
+    <>
+      {MuiConnectedListLazy && (
+        <MuiConnectedListLazy
+          list={genres}
+          href="/catalog/genre/"
+          titleIdentifierKey="name"
+        />
+      )}
+    </>
   );
 };
 

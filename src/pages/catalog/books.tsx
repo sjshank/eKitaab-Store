@@ -4,19 +4,32 @@ import { NextPageWithLayout } from "@/layouts/root";
 import { TAllBooks } from "@/types/book";
 import { retrieveAllBooksFromCatalog } from "@/services/books-api";
 import type { GetStaticProps } from "next";
-import MuiConnectedList from "@/ui/MuiConnectedList";
+import dynamic from "next/dynamic";
+import MuiSkeleton from "@/ui/MuiSkeleton";
 
 const BookList: NextPageWithLayout<{ books: TAllBooks[] }> = ({
   books,
 }: {
   books: TAllBooks[];
 }): React.JSX.Element => {
+  let MuiConnectedListLazy = null;
+
+  if (books.length > 0) {
+    MuiConnectedListLazy = dynamic(() => import("@/ui/MuiConnectedList"), {
+      loading: () => <MuiSkeleton />,
+      ssr: false,
+    });
+  }
   return (
-    <MuiConnectedList
-      list={books}
-      href="/catalog/book/"
-      titleIdentifierKey="title"
-    />
+    <>
+      {MuiConnectedListLazy && (
+        <MuiConnectedListLazy
+          list={books}
+          href="/catalog/book/"
+          titleIdentifierKey="title"
+        />
+      )}
+    </>
   );
 };
 

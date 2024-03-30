@@ -4,7 +4,8 @@ import { NextPageWithLayout } from "@/layouts/root";
 import { TBookInstance } from "@/types/book";
 import { retrieveAllBookInstancesFromCatalog } from "@/services/books-api";
 import type { GetStaticProps } from "next";
-import MuiConnectedList from "@/ui/MuiConnectedList";
+import dynamic from "next/dynamic";
+import MuiSkeleton from "@/ui/MuiSkeleton";
 
 const BookInstanceList: NextPageWithLayout<{
   bookInstances: TBookInstance[];
@@ -13,12 +14,24 @@ const BookInstanceList: NextPageWithLayout<{
 }: {
   bookInstances: TBookInstance[];
 }): React.JSX.Element => {
+  let MuiConnectedListLazy = null;
+
+  if (bookInstances.length > 0) {
+    MuiConnectedListLazy = dynamic(() => import("@/ui/MuiConnectedList"), {
+      loading: () => <MuiSkeleton />,
+      ssr: false,
+    });
+  }
   return (
-    <MuiConnectedList
-      list={bookInstances}
-      href="/catalog/bookinstance/"
-      titleIdentifierKey="title"
-    />
+    <>
+      {MuiConnectedListLazy && (
+        <MuiConnectedListLazy
+          list={bookInstances}
+          href="/catalog/bookinstance/"
+          titleIdentifierKey="title"
+        />
+      )}
+    </>
   );
 };
 
