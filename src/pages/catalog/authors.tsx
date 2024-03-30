@@ -4,17 +4,30 @@ import React from "react";
 import type { GetStaticProps } from "next";
 import { TAuthor } from "@/types/book";
 import { retrieveAllRegisteredAuthors } from "@/services/authors-api";
-import MuiConnectedList from "@/ui/MuiConnectedList";
+import dynamic from "next/dynamic";
+import MuiSkeleton from "@/ui/MuiSkeleton";
 
 const AuthorList: NextPageWithLayout<{ authors: TAuthor[] }> = ({
   authors,
 }): React.JSX.Element => {
+  let MuiConnectedListLazy = null;
+
+  if (authors.length > 0) {
+    MuiConnectedListLazy = dynamic(() => import("@/ui/MuiConnectedList"), {
+      loading: () => <MuiSkeleton />,
+      ssr: false,
+    });
+  }
   return (
-    <MuiConnectedList
-      list={authors}
-      href="/catalog/author/"
-      titleIdentifierKey="fullName"
-    />
+    <>
+      {MuiConnectedListLazy && (
+        <MuiConnectedListLazy
+          list={authors}
+          href="/catalog/author/"
+          titleIdentifierKey="fullName"
+        />
+      )}
+    </>
   );
 };
 
