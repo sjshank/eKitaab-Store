@@ -12,7 +12,7 @@ export const getGenreDetailsById = async (id: string) => {
 };
 
 export const addNewGenre = async (name: string) => {
-  const response = await fetch(`${process.env.WEBSITE_URL}api/genre`, {
+  const response = await fetch(`/api/genre`, {
     method: "POST",
     body: JSON.stringify({ name }),
   });
@@ -20,7 +20,7 @@ export const addNewGenre = async (name: string) => {
 };
 
 export const updateGenreById = async (genre: TGenre) => {
-  const response = await fetch(`${process.env.WEBSITE_URL}api/genre`, {
+  const response = await fetch(`/api/genre`, {
     method: "PUT",
     body: JSON.stringify({ ...genre }),
   });
@@ -28,7 +28,7 @@ export const updateGenreById = async (genre: TGenre) => {
 };
 
 export const deleteGenreById = async (id: string) => {
-  const response = await fetch(`${process.env.WEBSITE_URL}api/genre`, {
+  const response = await fetch(`/api/genre`, {
     method: "DELETE",
     body: JSON.stringify({ _id: id }),
   });

@@ -16,7 +16,7 @@ export const getBookDetailsById = async (id: string) => {
 };
 
 export const registerNewBook = async (book: TBookFormFields) => {
-  const data = await callApiEndpoint(`${process.env.WEBSITE_URL}api/book`, {
+  const data = await callApiEndpoint(`/api/book`, {
     method: "POST",
     body: JSON.stringify(book),
   });
@@ -24,7 +24,7 @@ export const registerNewBook = async (book: TBookFormFields) => {
 };
 
 export const updateBookDetailsById = async (book: TBookFormFields) => {
-  const data = await fetch(`${process.env.WEBSITE_URL}api/book`, {
+  const data = await fetch(`/api/book`, {
     method: "PUT",
     body: JSON.stringify({ ...book }),
   });
@@ -32,7 +32,7 @@ export const updateBookDetailsById = async (book: TBookFormFields) => {
 };
 
 export const deleteBookById = async (id: string) => {
-  const data = await fetch(`${process.env.WEBSITE_URL}api/book`, {
+  const data = await fetch(`/api/book`, {
     method: "DELETE",
     body: id,
   });
@@ -59,20 +59,17 @@ export const createNewBookInstance = async (
   bookInstance: TBookInstanceFormFields
 ) => {
   let _bookInstance = { ...bookInstance, dueDate: bookInstance.due_back };
-  const data = await callApiEndpoint(
-    `${process.env.WEBSITE_URL}api/bookinstance`,
-    {
-      method: "POST",
-      body: JSON.stringify(_bookInstance),
-    }
-  );
+  const data = await callApiEndpoint(`/api/bookinstance`, {
+    method: "POST",
+    body: JSON.stringify(_bookInstance),
+  });
   return data;
 };
 
 export const updateBookInstanceDetailsById = async (
   bookInstanceFormFieldValues: TBookInstanceFormFields
 ) => {
-  const data = await fetch(`${process.env.WEBSITE_URL}api/bookinstance`, {
+  const data = await fetch(`/api/bookinstance`, {
     method: "PUT",
     body: JSON.stringify({ ...bookInstanceFormFieldValues }),
   });
@@ -80,7 +77,7 @@ export const updateBookInstanceDetailsById = async (
 };
 
 export const deleteBookInstanceById = async (id: string) => {
-  const data = await fetch(`${process.env.WEBSITE_URL}api/bookinstance`, {
+  const data = await fetch(`/api/bookinstance`, {
     method: "DELETE",
     body: id,
   });
