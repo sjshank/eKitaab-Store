@@ -23,9 +23,7 @@ const ConnectedForm = (props: TAuthorFormProps & FormikProps<TAuthor>) => {
 const AuthorForm = withFormik<TAuthorFormProps, TAuthor>({
   mapPropsToValues: (props) => {
     return {
-      _id: props.author?._id || "",
-      family_name: props.author?.family_name || "",
-      first_name: props.author?.first_name || "",
+      ...props.author,
       date_of_birth:
         props.author?.date_of_birth ||
         dayjs().subtract(5, "years").toISOString(),

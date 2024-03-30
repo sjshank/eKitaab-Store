@@ -35,17 +35,22 @@ const AuthorDetailPage: NextPageWithLayout<TAuthorDetail> = ({
   usePerformDelete(deleteAuthorById.bind(null, author._id), "authors");
 
   const router = useRouter();
-  const { formLegends } = useContext<TFormContext>(FormContext);
+  const { formLegends, updateFormLegends } =
+    useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
 
-  const handleSubmitAction = useCallback(async (author: TAuthor) => {
-    const response = await updateAuthorDetailsById(author);
-    if (response.status == 202) {
-      router.push(author._id);
-    } else {
-      console.log(await response.json());
-    }
-  }, []);
+  const handleSubmitAction = useCallback(
+    async (author: TAuthor) => {
+      const response = await updateAuthorDetailsById(author);
+      if (response.status == 202) {
+        router.push(author._id);
+        updateFormLegends({ ...formLegends, isEdit: false });
+      } else {
+        console.log(await response.json());
+      }
+    },
+    [author]
+  );
 
   const initialValues = useInitialValues({
     author: { ...author },

@@ -50,7 +50,7 @@ const BookInstanceFieldProps = {
     id: "due_back",
     name: "due_back",
     label: "Date When Book Available",
-    minDate: dayjs(),
+    // minDate: dayjs(),
   },
   status: {
     id: "status",

@@ -22,8 +22,7 @@ const ConnectedForm = (props: TGenreFormProps & FormikProps<TGenre>) => {
 const GenreForm = withFormik<TGenreFormProps, TGenre>({
   mapPropsToValues: (props) => {
     return {
-      _id: props.genre?._id || "",
-      name: props.genre?.name || "",
+      ...props.genre,
     };
   },
   validationSchema: GenreFormSchema,

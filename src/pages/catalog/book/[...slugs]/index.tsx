@@ -46,7 +46,8 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
   usePerformDelete(deleteBookById.bind(null, book._id), "books");
 
   const router = useRouter();
-  const { formLegends } = useContext<TFormContext>(FormContext);
+  const { formLegends, updateFormLegends } =
+    useContext<TFormContext>(FormContext);
   const { isEdit } = formLegends;
 
   const handleSubmitAction = useCallback(
@@ -54,11 +55,12 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
       const response = await updateBookDetailsById(book);
       if (response.status == 202) {
         router.push(book._id);
+        updateFormLegends({ ...formLegends, isEdit: false });
       } else {
         console.log(await response.json());
       }
     },
-    [book]
+    [book.author, book.genre, book.isbn, book.summary, book.title]
   );
 
   const initialValues = useInitialValues({

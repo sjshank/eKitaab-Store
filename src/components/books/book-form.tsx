@@ -28,12 +28,7 @@ const ConnectedForm = (
 const BookForm = withFormik<TBookFormProps, TBookFormFields>({
   mapPropsToValues: (props) => {
     return {
-      _id: props.book?._id || "",
-      title: props.book?.title || "",
-      author: props.book?.author || "",
-      genre: props.book?.genre || "",
-      isbn: props.book?.isbn || "",
-      summary: props.book?.summary || "",
+      ...props.book,
     };
   },
   validationSchema: BookFormSchema,

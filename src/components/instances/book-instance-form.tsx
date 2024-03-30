@@ -29,11 +29,9 @@ const BookInstanceForm = withFormik<
 >({
   mapPropsToValues: (props) => {
     return {
-      _id: props.bookInstance?._id || "",
-      book: props.bookInstance?.book || "",
+      ...props.bookInstance,
       due_back:
         props.bookInstance?.due_back || dayjs().add(1, "day").toISOString(),
-      imprint: props.bookInstance?.imprint || "",
       status: props.bookInstance?.status || "Available",
     };
   },

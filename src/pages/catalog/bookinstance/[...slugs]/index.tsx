@@ -58,7 +58,7 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
         console.log(await response.json());
       }
     },
-    []
+    [bookInstance.due_back, bookInstance.imprint, bookInstance.status]
   );
 
   const initialValues = useInitialValues({
