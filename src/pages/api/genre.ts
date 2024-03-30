@@ -10,24 +10,26 @@ export default async function handler(
 ) {
   try {
     const { body, method } = req;
+    console.log(method);
+    const genre = JSON.parse(body);
     if (method === "POST") {
+      console.log("inside POST");
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
         `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/create`,
         {
           method: "POST",
-          body: body,
+          body: JSON.stringify(genre),
         }
       );
       const response = await fetch(fetchUrl, fetchOptions);
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "PUT") {
-      const genre = JSON.parse(body);
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
         `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/${genre._id}/update`,
         {
           method: "PUT",
-          body: body,
+          body: JSON.stringify(genre),
         }
       );
 
@@ -35,8 +37,9 @@ export default async function handler(
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "DELETE") {
+      const { _id } = genre;
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/${body}/delete`,
+        `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/${_id}/delete`,
         {
           method: "DELETE",
         }
