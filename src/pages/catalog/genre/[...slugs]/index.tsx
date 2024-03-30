@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps = (async (context) => {
       books,
       title: genre.name,
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 }) as GetStaticProps<TGenreDetail>;
 
@@ -100,7 +100,7 @@ export const getStaticPaths = (async () => {
   }));
   return {
     paths: paths,
-    fallback: "blocking",
+    fallback: true,
   };
 }) satisfies GetStaticPaths;
 
