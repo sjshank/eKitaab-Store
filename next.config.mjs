@@ -42,10 +42,10 @@ const nextConfig = {
             value: process.env.X_FRAME_OPTION,
           },
           //prevents the browser from attempting to guess the type of content if the Content-Type header is not explicitly set. This can prevent XSS exploits for websites that allow users to upload and share files
-          {
-            key: "X-Content-Type-Options",
-            value: process.env.X_CONTENT_TYPE_OPTION,
-          },
+          // {
+          //   key: "X-Content-Type-Options",
+          //   value: process.env.X_CONTENT_TYPE_OPTION,
+          // },
           //controls how much information the browser includes when navigating from the current website (origin) to another
           {
             key: "Referrer-Policy",

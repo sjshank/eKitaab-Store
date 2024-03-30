@@ -34,7 +34,7 @@ const BookInstanceFieldProps = {
     name: "book",
     label: "Book",
     value: "book",
-    labelId: "select-book",
+    labelId: "book",
     required: true,
   },
   imprint: {
@@ -57,7 +57,7 @@ const BookInstanceFieldProps = {
     name: "status",
     label: "Status",
     value: "status",
-    labelId: "select-status",
+    labelId: "status",
     required: true,
   },
 };
@@ -99,7 +99,7 @@ const BookInstanceFormFields: React.FunctionComponent<
   return (
     <>
       <FormControl required sx={{ my: 2 }}>
-        <InputLabel id={BookInstanceFieldProps.book.label}>
+        <InputLabel id={BookInstanceFieldProps.book.id}>
           {BookInstanceFieldProps.book.label}
         </InputLabel>
         <Select
@@ -107,6 +107,7 @@ const BookInstanceFormFields: React.FunctionComponent<
           size="medium"
           required
           tabIndex={0}
+          aria-label={BookInstanceFieldProps.book.id}
           disabled={isEdit || isSubmitting}
           color="primary"
           value={values[BookInstanceFieldProps.book.name]}
@@ -157,7 +158,7 @@ const BookInstanceFormFields: React.FunctionComponent<
       />
 
       <FormControl required sx={{ my: 2 }}>
-        <InputLabel id={BookInstanceFieldProps.status.label}>
+        <InputLabel id={BookInstanceFieldProps.status.id}>
           {BookInstanceFieldProps.status.label}
         </InputLabel>
         <Select
@@ -165,6 +166,7 @@ const BookInstanceFormFields: React.FunctionComponent<
           size="medium"
           required
           tabIndex={0}
+          aria-label={BookInstanceFieldProps.status.id}
           disabled={isSubmitting}
           color="primary"
           value={values[BookInstanceFieldProps.status.name]}

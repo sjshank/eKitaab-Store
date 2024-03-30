@@ -35,15 +35,15 @@ const BookFieldProps = {
     name: "author",
     label: "Authors",
     value: "author",
-    labelId: "select-author",
+    labelId: "author",
     required: true,
   },
   genres: {
-    id: "genre",
+    id: "genres",
     name: "genre",
     label: "Genres",
     value: "genre",
-    labelId: "select-genre",
+    labelId: "genres",
     required: true,
   },
 };
@@ -136,7 +136,7 @@ const BookFormFields = ({
         }></TextField>
 
       <FormControl required sx={{ my: 2 }}>
-        <InputLabel id={BookFieldProps.author.label}>
+        <InputLabel id={BookFieldProps.author.id}>
           {BookFieldProps.author.label}
         </InputLabel>
         <Select
@@ -145,6 +145,7 @@ const BookFormFields = ({
           required
           disabled={isSubmitting}
           tabIndex={0}
+          aria-label={BookFieldProps.author.id}
           color="primary"
           value={values[BookFieldProps.author.name]}
           onBlur={handleBlur}
@@ -162,7 +163,7 @@ const BookFormFields = ({
       </FormControl>
 
       <FormControl required sx={{ my: 2 }}>
-        <InputLabel id={BookFieldProps.genres.label}>
+        <InputLabel id={BookFieldProps.genres.id}>
           {BookFieldProps.genres.label}
         </InputLabel>
         <Select
@@ -171,6 +172,7 @@ const BookFormFields = ({
           required
           disabled={isSubmitting}
           tabIndex={0}
+          aria-label={BookFieldProps.genres.id}
           color="primary"
           multiple
           value={values[BookFieldProps.genres.name]}
