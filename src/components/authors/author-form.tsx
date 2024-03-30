@@ -9,7 +9,7 @@ import AuthorFormFields from "./author-form-fields";
 
 export type TAuthorFormProps = {
   author: TAuthor;
-  onSubmit: (author: TAuthor) => void;
+  onSubmit: (author: TAuthor, setIsSubmitting: (flag: boolean) => void) => void;
 };
 
 const ConnectedForm = (props: TAuthorFormProps & FormikProps<TAuthor>) => {
@@ -35,8 +35,7 @@ const AuthorForm = withFormik<TAuthorFormProps, TAuthor>({
 
   handleSubmit: (values, formikBag) => {
     const { props, setSubmitting } = formikBag;
-    props.onSubmit(values);
-    setSubmitting(false);
+    props.onSubmit(values, setSubmitting);
   },
 })(ConnectedForm);
 

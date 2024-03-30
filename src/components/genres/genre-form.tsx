@@ -1,5 +1,5 @@
 import React from "react";
-import { FormikBag, FormikProps } from "formik";
+import { FormikProps } from "formik";
 import { withFormik } from "formik";
 import { TGenre } from "@/types/book";
 import FormLayout from "@/layouts/form";
@@ -8,7 +8,7 @@ import GenreFormFields from "./genre-form-fields";
 
 export type TGenreFormProps = {
   genre: TGenre;
-  onSubmit: (genre: TGenre) => void;
+  onSubmit: (genre: TGenre, setIsSubmitting: (flag: boolean) => void) => void;
 };
 
 const ConnectedForm = (props: TGenreFormProps & FormikProps<TGenre>) => {
@@ -29,8 +29,7 @@ const GenreForm = withFormik<TGenreFormProps, TGenre>({
 
   handleSubmit: (values, formikBag) => {
     const { props, setSubmitting } = formikBag;
-    props.onSubmit(values);
-    setSubmitting(false);
+    props.onSubmit(values, setSubmitting);
   },
 })(ConnectedForm);
 

@@ -52,7 +52,10 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
   const { updateAlert } = useContext<TAlertContext>(AlertContext);
 
   const handleSubmitAction = useCallback(
-    async (bookInstanceFormFieldValues: TBookInstanceFormFields) => {
+    async (
+      bookInstanceFormFieldValues: TBookInstanceFormFields,
+      setIsSubmitting: (flag: boolean) => void
+    ) => {
       const response = await updateBookInstanceDetailsById(
         bookInstanceFormFieldValues
       );
@@ -64,6 +67,7 @@ const BookInstanceDetail: NextPageWithLayout<TBookInstanceDetail> = ({
         });
         //@ts-ignore
         router.push(bookInstance._id);
+        setIsSubmitting(false);
         updateFormLegends({ ...formLegends, isEdit: false });
       } else {
         const data = await response.json();

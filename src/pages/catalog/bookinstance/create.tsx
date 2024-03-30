@@ -27,7 +27,10 @@ const CreateBookInstance: NextPageWithLayout<TRegisterBookProps> = ({
   const { updateAlert } = useContext<TAlertContext>(AlertContext);
 
   const handleSubmitAction = useCallback(
-    async (bookInstanceFormFieldValues: TBookInstanceFormFields) => {
+    async (
+      bookInstanceFormFieldValues: TBookInstanceFormFields,
+      setIsSubmitting: (flag: boolean) => void
+    ) => {
       const response = await createNewBookInstance(bookInstanceFormFieldValues);
       if (response.status == 201) {
         updateAlert({
@@ -36,6 +39,7 @@ const CreateBookInstance: NextPageWithLayout<TRegisterBookProps> = ({
           type: "success",
         });
         router.push("/catalog/bookinstances");
+        setIsSubmitting(false);
       } else {
         const data = await response.json();
         updateAlert({ show: true, message: data.message, type: "error" });

@@ -17,7 +17,7 @@ const CreateGenre: NextPageWithLayout<{}> = (): React.JSX.Element => {
   const { updateAlert } = useContext<TAlertContext>(AlertContext);
 
   const handleSubmitAction = useCallback(
-    async (genre: TGenre) => {
+    async (genre: TGenre, setIsSubmitting: (flag: boolean) => void) => {
       const response = await addNewGenre(genre.name);
       if (response.status == 201) {
         updateAlert({
@@ -26,6 +26,7 @@ const CreateGenre: NextPageWithLayout<{}> = (): React.JSX.Element => {
           type: "success",
         });
         router.push("/catalog/genres");
+        setIsSubmitting(false);
       } else {
         const data = await response.json();
         updateAlert({ show: true, message: data.message, type: "error" });

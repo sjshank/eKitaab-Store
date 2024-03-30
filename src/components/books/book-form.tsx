@@ -8,7 +8,10 @@ import BookFormFields from "./book-form-fields";
 
 export type TBookFormProps = {
   book: TBookFormFields;
-  onSubmit: (bookFormFieldValues: TBookFormFields) => void;
+  onSubmit: (
+    bookFormFieldValues: TBookFormFields,
+    setIsSubmitting: (flag: boolean) => void
+  ) => void;
   authors: TAuthor[];
   genres: TGenre[];
 };
@@ -35,8 +38,7 @@ const BookForm = withFormik<TBookFormProps, TBookFormFields>({
 
   handleSubmit: (values, formikBag) => {
     const { props, setSubmitting } = formikBag;
-    props.onSubmit(values);
-    setSubmitting(false);
+    props.onSubmit(values, setSubmitting);
   },
 })(ConnectedForm);
 

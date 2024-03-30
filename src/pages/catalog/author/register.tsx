@@ -16,20 +16,24 @@ const RegisterAuthor: NextPageWithLayout<{}> = () => {
   const router = useRouter();
   const { updateAlert } = useContext<TAlertContext>(AlertContext);
 
-  const handleSubmitAction = useCallback(async (author: TAuthor) => {
-    const response = await registerNewAuthor(author);
-    if (response.status == 201) {
-      updateAlert({
-        show: true,
-        message: RECORD_SUCCESS_MSG,
-        type: "success",
-      });
-      router.push("/catalog/authors");
-    } else {
-      const data = await response.json();
-      updateAlert({ show: true, message: data.message, type: "error" });
-    }
-  }, []);
+  const handleSubmitAction = useCallback(
+    async (author: TAuthor, setIsSubmitting: (flag: boolean) => void) => {
+      const response = await registerNewAuthor(author);
+      if (response.status == 201) {
+        updateAlert({
+          show: true,
+          message: RECORD_SUCCESS_MSG,
+          type: "success",
+        });
+        router.push("/catalog/authors");
+        setIsSubmitting(false);
+      } else {
+        const data = await response.json();
+        updateAlert({ show: true, message: data.message, type: "error" });
+      }
+    },
+    []
+  );
   const initialValues = useInitialValues({
     author: {} as TAuthor,
     onSubmit: handleSubmitAction,

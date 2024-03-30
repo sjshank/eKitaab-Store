@@ -44,7 +44,7 @@ const GenreDetail: NextPageWithLayout<TGenreDetail> = ({
   const { updateAlert } = useContext<TAlertContext>(AlertContext);
 
   const handleSubmitAction = useCallback(
-    async (genre: TGenre) => {
+    async (genre: TGenre, setIsSubmitting: (flag: boolean) => void) => {
       const response = await updateGenreById(genre);
       if (response.status == 202) {
         updateAlert({
@@ -53,6 +53,7 @@ const GenreDetail: NextPageWithLayout<TGenreDetail> = ({
           type: "success",
         });
         router.push(genre._id);
+        setIsSubmitting(false);
         updateFormLegends({ ...formLegends, isEdit: false });
       } else {
         const data = await response.json();

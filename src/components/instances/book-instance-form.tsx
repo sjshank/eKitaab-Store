@@ -9,7 +9,10 @@ import dayjs from "dayjs";
 
 export type TBookInstanceFormProps = {
   bookInstance: TBookInstanceFormFields;
-  onSubmit: (bookInstanceFormFieldValues: TBookInstanceFormFields) => void;
+  onSubmit: (
+    bookInstanceFormFieldValues: TBookInstanceFormFields,
+    setIsSubmitting: (flag: boolean) => void
+  ) => void;
   books: TBook[];
 };
 
@@ -39,8 +42,7 @@ const BookInstanceForm = withFormik<
 
   handleSubmit: (values, formikBag) => {
     const { props, setSubmitting } = formikBag;
-    props.onSubmit(values);
-    setSubmitting(false);
+    props.onSubmit(values, setSubmitting);
   },
 })(ConnectedForm);
 

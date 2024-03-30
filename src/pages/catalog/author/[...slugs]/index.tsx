@@ -45,7 +45,7 @@ const AuthorDetailPage: NextPageWithLayout<TAuthorDetail> = ({
   const { updateAlert } = useContext<TAlertContext>(AlertContext);
 
   const handleSubmitAction = useCallback(
-    async (author: TAuthor) => {
+    async (author: TAuthor, setIsSubmitting: (flag: boolean) => void) => {
       const response = await updateAuthorDetailsById(author);
       if (response.status == 202) {
         updateAlert({
@@ -54,6 +54,7 @@ const AuthorDetailPage: NextPageWithLayout<TAuthorDetail> = ({
           type: "success",
         });
         router.push(author._id);
+        setIsSubmitting(false);
         updateFormLegends({ ...formLegends, isEdit: false });
       } else {
         const data = await response.json();
