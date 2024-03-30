@@ -9,6 +9,7 @@ export const isValidUrlFormat = (url: string) => {
 };
 
 export const parseError = (error: any, res: NextApiResponse<any>) => {
+  console.log("--parseerr---", error);
   if (error["cause"]["code"] == "ECONNREFUSED") {
     res.status(500).json({ message: "Service is not available" });
   } else {
@@ -19,6 +20,7 @@ export const parseError = (error: any, res: NextApiResponse<any>) => {
 };
 
 export const parseResponse = async (res: Response) => {
+  console.log("--parseResp---", res);
   if (!res.status.toString().startsWith("20")) {
     const message = await res.json();
     return message;

@@ -9,9 +9,10 @@ export default async function handler(
   res: NextApiResponse<TGenre & { message: string }>
 ) {
   try {
-    const { body, method } = req;
-    const genre = JSON.parse(body);
+    const { method } = req;
     if (method === "POST") {
+      const { body } = req;
+      const genre = JSON.parse(body);
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
         `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/create`,
         {
@@ -23,6 +24,9 @@ export default async function handler(
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "PUT") {
+      const { body } = req;
+      console.log(body);
+      const genre = JSON.parse(body);
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
         `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/${genre._id}/update`,
         {
@@ -35,6 +39,8 @@ export default async function handler(
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "DELETE") {
+      const { body } = req;
+      const genre = JSON.parse(body);
       const { _id } = genre;
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
         `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/${_id}/delete`,
@@ -45,7 +51,8 @@ export default async function handler(
       const response = await fetch(fetchUrl, fetchOptions);
       const data = await parseResponse(response);
       res.status(response.status).json(data);
-    } else {
+    } else if (method === "GET") {
+      console.log("inside Get");
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
         `${process.env.API_ENDPOINT_ORIGIN}catalog/genres`,
         {
