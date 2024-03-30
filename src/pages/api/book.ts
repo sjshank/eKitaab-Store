@@ -11,11 +11,12 @@ export default async function handler(
   try {
     const { body, method } = req;
     if (method === "POST") {
+      const book = JSON.parse(body);
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/book/create`,
+        `/catalog/book/create`,
         {
           method: "POST",
-          body: JSON.stringify(body),
+          body: JSON.stringify(book),
         }
       );
       const response = await fetch(fetchUrl, fetchOptions);
@@ -24,18 +25,20 @@ export default async function handler(
     } else if (method === "PUT") {
       const book = JSON.parse(body);
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/book/${book._id}/update`,
+        `/catalog/book/${book._id}/update`,
         {
           method: "PUT",
-          body: body,
+          body: JSON.stringify(book),
         }
       );
       const response = await fetch(fetchUrl, fetchOptions);
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "DELETE") {
+      const book = JSON.parse(body);
+      const { _id } = book;
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/book/${body}/delete`,
+        `/catalog/book/${_id}/delete`,
         {
           method: "DELETE",
         }

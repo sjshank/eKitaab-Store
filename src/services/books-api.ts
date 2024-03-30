@@ -6,19 +6,19 @@ import {
 } from "@/types/book";
 
 export const retrieveAllBooksFromCatalog = async () => {
-  const data = await callApiEndpoint(`catalog/books`);
+  const data = await callApiEndpoint(`/catalog/books`);
   return data;
 };
 
 export const getBookDetailsById = async (id: string) => {
-  const data = await callApiEndpoint(`catalog/book/${id}`);
+  const data = await callApiEndpoint(`/catalog/book/${id}`);
   return data;
 };
 
 export const registerNewBook = async (book: TBookFormFields) => {
-  const data = await callApiEndpoint(`/api/book`, {
+  const data = await fetch(`/api/book`, {
     method: "POST",
-    body: JSON.stringify(book),
+    body: JSON.stringify({ ...book }),
   });
   return data;
 };
@@ -34,14 +34,14 @@ export const updateBookDetailsById = async (book: TBookFormFields) => {
 export const deleteBookById = async (id: string) => {
   const data = await fetch(`/api/book`, {
     method: "DELETE",
-    body: id,
+    body: JSON.stringify({ _id: id }),
   });
   return data;
 };
 
 export const retrieveAllBookInstancesFromCatalog = async () => {
   let data = (await callApiEndpoint(
-    `catalog/bookinstances`
+    `/catalog/bookinstances`
   )) as TBookInstance[];
   data = data.map((d) => ({
     ...d,
@@ -51,7 +51,7 @@ export const retrieveAllBookInstancesFromCatalog = async () => {
 };
 
 export const getBookInstanceDetailsById = async (id: string) => {
-  const data = await callApiEndpoint(`catalog/bookinstance/${id}`);
+  const data = await callApiEndpoint(`/catalog/bookinstance/${id}`);
   return data;
 };
 
@@ -59,9 +59,9 @@ export const createNewBookInstance = async (
   bookInstance: TBookInstanceFormFields
 ) => {
   let _bookInstance = { ...bookInstance, dueDate: bookInstance.due_back };
-  const data = await callApiEndpoint(`/api/bookinstance`, {
+  const data = await fetch(`/api/bookinstance`, {
     method: "POST",
-    body: JSON.stringify(_bookInstance),
+    body: JSON.stringify({ ..._bookInstance }),
   });
   return data;
 };
@@ -79,7 +79,7 @@ export const updateBookInstanceDetailsById = async (
 export const deleteBookInstanceById = async (id: string) => {
   const data = await fetch(`/api/bookinstance`, {
     method: "DELETE",
-    body: id,
+    body: JSON.stringify({ _id: id }),
   });
   return data;
 };

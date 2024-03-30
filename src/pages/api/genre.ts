@@ -10,10 +10,10 @@ export default async function handler(
 ) {
   try {
     const { body, method } = req;
-    const genre = JSON.parse(body);
     if (method === "POST") {
+      const genre = JSON.parse(body);
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/create`,
+        `/catalog/genre/create`,
         {
           method: "POST",
           body: JSON.stringify(genre),
@@ -23,8 +23,9 @@ export default async function handler(
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "PUT") {
+      const genre = JSON.parse(body);
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/${genre._id}/update`,
+        `/catalog/genre/${genre._id}/update`,
         {
           method: "PUT",
           body: JSON.stringify(genre),
@@ -35,9 +36,10 @@ export default async function handler(
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "DELETE") {
+      const genre = JSON.parse(body);
       const { _id } = genre;
       const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/genre/${_id}/delete`,
+        `/catalog/genre/${_id}/delete`,
         {
           method: "DELETE",
         }
@@ -45,13 +47,8 @@ export default async function handler(
       const response = await fetch(fetchUrl, fetchOptions);
       const data = await parseResponse(response);
       res.status(response.status).json(data);
-    } else {
-      const [fetchUrl, fetchOptions] = prepareApiEndpoint(
-        `${process.env.API_ENDPOINT_ORIGIN}catalog/genres`,
-        {
-          method: "GET",
-        }
-      );
+    } else if (method === "GET") {
+      const [fetchUrl, fetchOptions] = prepareApiEndpoint(`/catalog/genres`);
       const response = await fetch(fetchUrl, fetchOptions);
       const data = await parseResponse(response);
       res.status(response.status).json(data);
