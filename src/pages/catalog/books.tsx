@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<{
     props: {
       books: response,
     },
-    revalidate: 30,
+    revalidate: 5,
   };
 };
 

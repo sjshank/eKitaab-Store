@@ -96,7 +96,7 @@ export const getStaticProps: GetStaticProps = (async (context) => {
       books,
       title: `${author.first_name}, ${author.family_name}`,
     },
-    revalidate: 60,
+    revalidate: 10,
   };
 }) as GetStaticProps<TAuthorDetail>;
 
