@@ -16,7 +16,7 @@ export const addNewGenre = async (name: string) => {
     `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`,
     {
       method: "POST",
-      body: JSON.stringify({ name: name }),
+      body: JSON.stringify({ name }),
     }
   );
   return response;
@@ -38,7 +38,7 @@ export const deleteGenreById = async (id: string) => {
     `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/genre`,
     {
       method: "DELETE",
-      body: id,
+      body: JSON.stringify({ _id: id }),
     }
   );
   return response;
