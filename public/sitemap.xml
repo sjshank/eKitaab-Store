@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://ekitaab-store.netlify.app</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/authors</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/bookinstances</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/books</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/genres</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/author/register</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/book/register</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/bookinstance/create</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/genre/add</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/author/[...slugs]/index</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/book/[...slugs]/index</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/bookinstance/[...slugs]/index</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://ekitaab-store.netlify.app/catalog/genre/[...slugs]/index</loc>
+    <lastmod>Sat Mar 30 2024 18:31:56 GMT+0530 (India Standard Time)</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+</urlset>

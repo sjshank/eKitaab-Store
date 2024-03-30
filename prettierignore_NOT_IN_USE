@@ -1,0 +1,6 @@
+dist
+build
+public
+node_modules
+package.json
+.next
