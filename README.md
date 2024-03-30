@@ -30,6 +30,22 @@
         - npx husky add .husky/pre-push "npm run build" : Build project before commit
         - commitlint.config.js : follow a standard convention for all our commit messages
 
+## Demo
+
+    <img width="1470" alt="image" src="https://github.com/sjshank/eKitaab-Store/assets/17022643/a4e8854c-909d-434e-9b7b-6b8568b065d2">
+
+    <img width="1470" alt="image" src="https://github.com/sjshank/eKitaab-Store/assets/17022643/67940f2a-f1b8-420a-b3b0-b59051a12a64">
+
+    <img width="1470" alt="image" src="https://github.com/sjshank/eKitaab-Store/assets/17022643/31bb4bc4-620c-45db-aba8-ea5682b984bc">
+
+    <img width="1470" alt="image" src="https://github.com/sjshank/eKitaab-Store/assets/17022643/2a11e5e3-0ba9-4f1c-b58f-88f7fbd8e370">
+
+    <img width="1470" alt="image" src="https://github.com/sjshank/eKitaab-Store/assets/17022643/cdf90596-e1f4-4efa-b3e5-b4a2ae7f6c93">
+
+    <img width="1470" alt="image" src="https://github.com/sjshank/eKitaab-Store/assets/17022643/384618d3-1428-4ede-8bf6-844cb5c1e917">
+
+
+
 ## Dependencies
 
     - React :  [18.2](https://react.dev/learn/installation)
