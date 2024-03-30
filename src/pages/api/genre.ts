@@ -45,6 +45,16 @@ export default async function handler(
       const response = await fetch(fetchUrl, fetchOptions);
       const data = await parseResponse(response);
       res.status(response.status).json(data);
+    } else {
+      const [fetchUrl, fetchOptions] = prepareApiEndpoint(
+        `${process.env.API_ENDPOINT_ORIGIN}catalog/genres`,
+        {
+          method: "GET",
+        }
+      );
+      const response = await fetch(fetchUrl, fetchOptions);
+      const data = await parseResponse(response);
+      res.status(response.status).json(data);
     }
   } catch (error: any) {
     parseError(error, res);
