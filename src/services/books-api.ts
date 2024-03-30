@@ -16,18 +16,15 @@ export const getBookDetailsById = async (id: string) => {
 };
 
 export const registerNewBook = async (book: TBookFormFields) => {
-  const data = await callApiEndpoint(
-    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/book`,
-    {
-      method: "POST",
-      body: JSON.stringify(book),
-    }
-  );
+  const data = await callApiEndpoint(`${process.env.WEBSITE_URL}api/book`, {
+    method: "POST",
+    body: JSON.stringify(book),
+  });
   return data;
 };
 
 export const updateBookDetailsById = async (book: TBookFormFields) => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/book`, {
+  const data = await fetch(`${process.env.WEBSITE_URL}api/book`, {
     method: "PUT",
     body: JSON.stringify({ ...book }),
   });
@@ -35,7 +32,7 @@ export const updateBookDetailsById = async (book: TBookFormFields) => {
 };
 
 export const deleteBookById = async (id: string) => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/book`, {
+  const data = await fetch(`${process.env.WEBSITE_URL}api/book`, {
     method: "DELETE",
     body: id,
   });
@@ -63,7 +60,7 @@ export const createNewBookInstance = async (
 ) => {
   let _bookInstance = { ...bookInstance, dueDate: bookInstance.due_back };
   const data = await callApiEndpoint(
-    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/bookinstance`,
+    `${process.env.WEBSITE_URL}api/bookinstance`,
     {
       method: "POST",
       body: JSON.stringify(_bookInstance),
@@ -75,23 +72,17 @@ export const createNewBookInstance = async (
 export const updateBookInstanceDetailsById = async (
   bookInstanceFormFieldValues: TBookInstanceFormFields
 ) => {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/bookinstance`,
-    {
-      method: "PUT",
-      body: JSON.stringify({ ...bookInstanceFormFieldValues }),
-    }
-  );
+  const data = await fetch(`${process.env.WEBSITE_URL}api/bookinstance`, {
+    method: "PUT",
+    body: JSON.stringify({ ...bookInstanceFormFieldValues }),
+  });
   return data;
 };
 
 export const deleteBookInstanceById = async (id: string) => {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/bookinstance`,
-    {
-      method: "DELETE",
-      body: id,
-    }
-  );
+  const data = await fetch(`${process.env.WEBSITE_URL}api/bookinstance`, {
+    method: "DELETE",
+    body: id,
+  });
   return data;
 };

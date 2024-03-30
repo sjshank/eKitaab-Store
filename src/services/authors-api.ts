@@ -16,18 +16,15 @@ export const getAuthorDetailsById = async (id: string) => {
 };
 
 export const registerNewAuthor = async (author: TAuthor) => {
-  const data = await callApiEndpoint(
-    `${process.env.NEXT_PUBLIC_WEBSITE_URL}api/author`,
-    {
-      method: "POST",
-      body: JSON.stringify(author),
-    }
-  );
+  const data = await callApiEndpoint(`${process.env.WEBSITE_URL}api/author`, {
+    method: "POST",
+    body: JSON.stringify(author),
+  });
   return data;
 };
 
 export const updateAuthorDetailsById = async (author: TAuthor) => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/author`, {
+  const data = await fetch(`${process.env.WEBSITE_URL}api/author`, {
     method: "PUT",
     body: JSON.stringify({ ...author }),
   });
@@ -35,7 +32,7 @@ export const updateAuthorDetailsById = async (author: TAuthor) => {
 };
 
 export const deleteAuthorById = async (id: string) => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}api/author`, {
+  const data = await fetch(`${process.env.WEBSITE_URL}api/author`, {
     method: "DELETE",
     body: id,
   });
