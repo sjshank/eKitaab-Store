@@ -19,7 +19,7 @@ const DashboardPage: NextPageWithLayout<{
     MetricsGridComponentLazy = dynamic(
       () => import("@/components/dashboard/metrics-grid"),
       {
-        loading: () => <p>Loading...</p>,
+        loading: () => <MuiSkeleton />,
         ssr: false,
       }
     );
