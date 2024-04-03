@@ -1,33 +1,35 @@
 import { isValidUrlFormat } from "@/utils/helper";
 
-interface GenericApiFn<String, Type> {
-  (api: String, arg?: Type): Type;
-}
-
-export const prepareApiEndpoint: GenericApiFn<string, any> = (
-  api: string,
-  _options?: any
+export const prepareApiEndpoint = <K extends string, T extends {}>(
+  api: K,
+  options?: T
 ) => {
-  const options = {
-    ..._options,
+  const _options = {
+    ...options,
     headers: {
       "Content-Type": "application/json",
     },
   };
-  return [
-    isValidUrlFormat(api)
+  console.log(`${process.env.API_ENDPOINT_ORIGIN}${api}`);
+  return {
+    api: isValidUrlFormat(api)
       ? `${api}`
       : `${process.env.API_ENDPOINT_ORIGIN}${api}`,
-    options,
-  ];
+    options: _options,
+  };
 };
 
-export const callApiEndpoint: GenericApiFn<string, any> = async (
-  _api: string,
-  _options?: any
+export const callApiEndpoint = async <K extends string, T extends {}>(
+  api: K,
+  options?: T
 ): Promise<any> => {
-  const [fetchUrl, fetchOptions] = prepareApiEndpoint(_api, _options);
+  const { api: fetchUrl, options: fetchOptions } = prepareApiEndpoint(
+    api,
+    options
+  );
+  console.log(fetchUrl);
   const response = await fetch(fetchUrl, fetchOptions);
+  console.log(await response);
   const data = await response.json();
   return data;
 };

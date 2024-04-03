@@ -1,7 +1,11 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 
-const Header: React.FunctionComponent<{ subHeader?: string }> = ({
+type THeaderProps<T> = {
+  subHeader?: T;
+};
+
+const Header: React.FunctionComponent<THeaderProps<string>> = ({
   subHeader,
 }): React.JSX.Element => {
   return (

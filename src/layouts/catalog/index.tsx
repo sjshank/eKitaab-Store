@@ -10,15 +10,14 @@ import FormContextProvider from "@/context/form-context";
 import { AlertContext, TAlertContext } from "@/context/alert-context";
 import MuiAlert from "@/ui/MuiAlert";
 
-type LayoutProps = {
-  children: React.ReactNode;
-  subHeader?: string;
+type LayoutProps<K, V> = {
+  children: K;
+  subHeader?: V;
 };
 
-const SecondaryLayout: NextPageWithLayout<LayoutProps> = ({
-  children,
-  subHeader,
-}): React.JSX.Element => {
+const SecondaryLayout: NextPageWithLayout<
+  LayoutProps<React.ReactNode, string>
+> = ({ children, subHeader }): React.JSX.Element => {
   const { alert } = useContext<TAlertContext>(AlertContext);
   return (
     <Box>
