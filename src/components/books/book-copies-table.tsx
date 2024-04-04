@@ -52,4 +52,6 @@ const BookCopies: React.FunctionComponent<{ copies: TBookInstance[] }> = ({
   );
 };
 
-export default BookCopies;
+const MemoizedBookCopies = React.memo(BookCopies);
+
+export default MemoizedBookCopies;

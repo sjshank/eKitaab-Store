@@ -12,7 +12,7 @@ export default async function handler(
     const { body, method } = req;
     if (method === "POST") {
       const copy = JSON.parse(body);
-      const [fetchUrl, fetchOptions] = prepareApiEndpoint(
+      const { api: fetchUrl, options: fetchOptions } = prepareApiEndpoint(
         `/catalog/bookinstance/create`,
         {
           method: "POST",
@@ -24,7 +24,7 @@ export default async function handler(
       res.status(response.status).json(data);
     } else if (method === "PUT") {
       const bookInstance = JSON.parse(body);
-      const [fetchUrl, fetchOptions] = prepareApiEndpoint(
+      const { api: fetchUrl, options: fetchOptions } = prepareApiEndpoint(
         `/catalog/bookinstance/${bookInstance._id}/update`,
         {
           method: "PUT",
@@ -37,7 +37,7 @@ export default async function handler(
     } else if (method === "DELETE") {
       const copy = JSON.parse(body);
       const { _id } = copy;
-      const [fetchUrl, fetchOptions] = prepareApiEndpoint(
+      const { api: fetchUrl, options: fetchOptions } = prepareApiEndpoint(
         `/catalog/bookinstance/${_id}/delete`,
         {
           method: "DELETE",

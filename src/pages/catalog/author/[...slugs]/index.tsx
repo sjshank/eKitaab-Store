@@ -62,7 +62,7 @@ const AuthorDetailPage: NextPageWithLayout<TAuthorDetail> = ({
       }
     },
     //@ts-ignore
-    [author, formLegends, router]
+    [author, formLegends, router, updateAlert, updateFormLegends]
   );
 
   const initialValues = useInitialValues({

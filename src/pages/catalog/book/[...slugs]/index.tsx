@@ -73,7 +73,7 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
       }
     },
     //@ts-ignore
-    [book, formLegends, router]
+    [book, formLegends, router, updateAlert, updateFormLegends]
   );
 
   const initialValues = useInitialValues({
@@ -88,11 +88,10 @@ const BookDetail: NextPageWithLayout<TBookDetail> = ({
     authors: authors,
     genres: genres,
   });
-  const isDataAvailable = !book || authors.length === 0 || genres.length === 0;
 
   return (
     <Stack>
-      {!isDataAvailable ?? <MuiSkeleton />}
+      {!book && <MuiSkeleton />}
       {book && copies && !isEdit && (
         <>
           <BookDetailSummary book={book} />

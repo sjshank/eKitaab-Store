@@ -6,29 +6,30 @@ import { retrieveAllBooksFromCatalog } from "@/services/books-api";
 import type { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import MuiSkeleton from "@/ui/MuiSkeleton";
+import MuiConnectedList from "@/ui/MuiConnectedList";
 
 const BookList: NextPageWithLayout<{ books: TAllBooks[] }> = ({
   books,
 }: {
   books: TAllBooks[];
 }): React.JSX.Element => {
-  let MuiConnectedListLazy = null;
+  // let MuiConnectedListLazy = null;
 
-  if (books.length > 0) {
-    MuiConnectedListLazy = dynamic(() => import("@/ui/MuiConnectedList"), {
-      loading: () => <MuiSkeleton />,
-      ssr: false,
-    });
-  }
+  // if (books.length > 0) {
+  //   MuiConnectedListLazy = dynamic(() => import("@/ui/MuiConnectedList"), {
+  //     loading: () => <MuiSkeleton />,
+  //     ssr: false,
+  //   });
+  // }
   return (
     <>
-      {MuiConnectedListLazy && (
-        <MuiConnectedListLazy
-          list={books}
-          href="/catalog/book/"
-          titleIdentifierKey="title"
-        />
-      )}
+      {/* {MuiConnectedListLazy && ( */}
+      <MuiConnectedList
+        list={books}
+        href="/catalog/book/"
+        titleIdentifierKey="title"
+      />
+      {/* )} */}
     </>
   );
 };

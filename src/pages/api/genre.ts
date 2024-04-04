@@ -12,7 +12,7 @@ export default async function handler(
     const { body, method } = req;
     if (method === "POST") {
       const genre = JSON.parse(body);
-      const [fetchUrl, fetchOptions] = prepareApiEndpoint(
+      const { api: fetchUrl, options: fetchOptions } = prepareApiEndpoint(
         `/catalog/genre/create`,
         {
           method: "POST",
@@ -24,7 +24,7 @@ export default async function handler(
       res.status(response.status).json(data);
     } else if (method === "PUT") {
       const genre = JSON.parse(body);
-      const [fetchUrl, fetchOptions] = prepareApiEndpoint(
+      const { api: fetchUrl, options: fetchOptions } = prepareApiEndpoint(
         `/catalog/genre/${genre._id}/update`,
         {
           method: "PUT",
@@ -38,7 +38,7 @@ export default async function handler(
     } else if (method === "DELETE") {
       const genre = JSON.parse(body);
       const { _id } = genre;
-      const [fetchUrl, fetchOptions] = prepareApiEndpoint(
+      const { api: fetchUrl, options: fetchOptions } = prepareApiEndpoint(
         `/catalog/genre/${_id}/delete`,
         {
           method: "DELETE",
@@ -48,7 +48,8 @@ export default async function handler(
       const data = await parseResponse(response);
       res.status(response.status).json(data);
     } else if (method === "GET") {
-      const [fetchUrl, fetchOptions] = prepareApiEndpoint(`/catalog/genres`);
+      const { api: fetchUrl, options: fetchOptions } =
+        prepareApiEndpoint(`/catalog/genres`);
       const response = await fetch(fetchUrl, fetchOptions);
       const data = await parseResponse(response);
       res.status(response.status).json(data);
