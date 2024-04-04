@@ -31,4 +31,5 @@ const BookDetailSummary: React.FunctionComponent<{ book: TBook }> = ({
   );
 };
 
-export default BookDetailSummary;
+const MemoizedBookDetailSummary = React.memo(BookDetailSummary);
+export default MemoizedBookDetailSummary;

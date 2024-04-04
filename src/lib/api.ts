@@ -10,7 +10,6 @@ export const prepareApiEndpoint = <K extends string, T extends {}>(
       "Content-Type": "application/json",
     },
   };
-  console.log(`${process.env.API_ENDPOINT_ORIGIN}${api}`);
   return {
     api: isValidUrlFormat(api)
       ? `${api}`
@@ -27,9 +26,7 @@ export const callApiEndpoint = async <K extends string, T extends {}>(
     api,
     options
   );
-  console.log(fetchUrl);
   const response = await fetch(fetchUrl, fetchOptions);
-  console.log(await response);
   const data = await response.json();
   return data;
 };

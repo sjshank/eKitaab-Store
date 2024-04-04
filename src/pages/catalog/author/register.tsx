@@ -32,7 +32,7 @@ const RegisterAuthor: NextPageWithLayout<{}> = () => {
         updateAlert({ show: true, message: data.message, type: "error" });
       }
     },
-    [router]
+    [router, updateAlert]
   );
   const initialValues = useInitialValues({
     author: {} as TAuthor,

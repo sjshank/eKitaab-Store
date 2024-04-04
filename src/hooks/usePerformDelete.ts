@@ -41,7 +41,15 @@ const usePerformDelete = (
       };
       deleteRecord();
     }
-  }, [formLegends.performDelete, actionName, formLegends, router]);
+  }, [
+    formLegends.performDelete,
+    actionName,
+    formLegends,
+    router,
+    route,
+    updateFormLegends,
+    updateAlert,
+  ]);
 };
 
 export default usePerformDelete;

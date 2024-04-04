@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import NextLink from "next/link";
 import Link from "@mui/material/Link";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -17,6 +17,20 @@ const MuiConnectedList: React.FunctionComponent<TConnectedListProps> = ({
   href,
   titleIdentifierKey,
 }) => {
+  const OpenIconComponent = useMemo(
+    () => (
+      <OpenInNewIcon
+        fontSize="small"
+        color="primary"
+        sx={{
+          verticalAlign: "top",
+          marginLeft: 1,
+        }}
+      />
+    ),
+    []
+  );
+
   return (
     <Box sx={{ width: "100%" }}>
       <List sx={{ listStyle: "decimal", ml: "2rem" }}>
@@ -40,14 +54,7 @@ const MuiConnectedList: React.FunctionComponent<TConnectedListProps> = ({
                   },
                 }}>
                 {title}
-                <OpenInNewIcon
-                  fontSize="small"
-                  color="primary"
-                  sx={{
-                    verticalAlign: "top",
-                    marginLeft: 1,
-                  }}
-                />
+                {OpenIconComponent}
               </Link>
             </ListItem>
           );

@@ -11,7 +11,7 @@ const useFormLegends = (formTitle: string, ctaLabel: string) => {
       formTitle: formTitle,
       ctaLabel: ctaLabel,
     });
-  }, [formLegends.isEdit]);
+  }, [formLegends.isEdit, ctaLabel, formTitle]);
 };
 
 export default useFormLegends;

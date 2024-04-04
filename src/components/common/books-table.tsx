@@ -41,4 +41,5 @@ const BooksTable: React.FunctionComponent<{ books: TBook[] }> = ({
   );
 };
 
-export default BooksTable;
+const MemoizedBooksTable = React.memo(BooksTable);
+export default MemoizedBooksTable;
