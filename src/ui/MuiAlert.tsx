@@ -11,7 +11,7 @@ const MuiAlert: React.FunctionComponent<{}> = () => {
       {alert?.show && (
         <Box component="div" id="snackbar" className={alert.show ? "show" : ""}>
           <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert variant="filled" severity={alert.type}>
+            <Alert variant="filled" severity={alert.type} data-testid="alert">
               {alert?.message}
             </Alert>
           </Stack>

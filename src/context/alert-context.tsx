@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import { AlertColor } from "@mui/material/Alert";
 
 export type TAlert = {
@@ -34,13 +34,13 @@ const AlertContextProvider: React.FunctionComponent<TAlertContextProps> = ({
     }
   }, [alert.show]);
 
-  const updateAlertHandler = (_alert: TAlert) => {
+  const updateAlertHandler = useCallback((_alert: TAlert) => {
     if (_alert.show) {
       setAlert(_alert);
     } else {
       setAlert({} as TAlert);
     }
-  };
+  }, []);
   return (
     <AlertContext.Provider
       value={{ alert: alert, updateAlert: updateAlertHandler }}>
