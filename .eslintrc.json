@@ -1,12 +1,11 @@
 {
-  "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
+  "extends": ["next", "next/core-web-vitals"],
   //   "plugins": ["prettier"],
   "globals": {
     "React": "readonly"
   },
   "rules": {
     "no-unused-vars": "warn",
-    "no-console": "warn",
-    "block-scoped-var": "warn"
+    "no-console": "warn"
   }
 }
