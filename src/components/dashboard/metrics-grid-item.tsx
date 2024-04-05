@@ -21,11 +21,16 @@ const MetricsGridItem: React.FunctionComponent<TDashboardData> = ({
               <Typography
                 variant="subtitle2"
                 component="p"
+                data-testid="metric-label"
                 sx={{ color: "#686D76" }}
                 className="metric-label">
                 {label}
               </Typography>
-              <Typography variant="h6" component="h6" className="metric-count">
+              <Typography
+                variant="h6"
+                component="h6"
+                className="metric-count"
+                data-testid="metric-count">
                 {count}
               </Typography>
             </Grid>

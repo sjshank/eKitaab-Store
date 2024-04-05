@@ -29,4 +29,6 @@ const ExploreCatalog: React.FunctionComponent<{}> = (): React.JSX.Element => {
   );
 };
 
-export default ExploreCatalog;
+const MemoizedExploreCatalog = React.memo(ExploreCatalog);
+
+export default MemoizedExploreCatalog;

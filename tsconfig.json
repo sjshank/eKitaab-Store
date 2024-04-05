@@ -21,7 +21,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/utils/generate-sitemap.mjs",
-    "next.config.mjs"
+    "next.config.mjs",
+    "src/__tests__/snapshot.tsx"
   ],
   "exclude": ["node_modules"]
 }
