@@ -11,7 +11,7 @@ const Header: React.FunctionComponent<THeaderProps<string>> = ({
   return (
     <>
       {subHeader && (
-        <Typography variant="h4" component="summary">
+        <Typography variant="h4" component="summary" data-testid="sub-header">
           {subHeader}
         </Typography>
       )}

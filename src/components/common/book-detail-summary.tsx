@@ -24,7 +24,7 @@ const BookDetailSummary: React.FunctionComponent<{ book: TBook }> = ({
       <MuiSummaryItem label="Summary" value={book.summary} />
       <MuiSummaryItem label="ISBN" value={book.isbn} />
       <MuiSummaryItem
-        label="Genre"
+        label="Genres"
         value={book.genre.map((g) => g.name).join(", ")}
       />
     </List>

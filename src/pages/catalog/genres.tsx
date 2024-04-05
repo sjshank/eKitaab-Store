@@ -1,7 +1,6 @@
 import WithCatalogLayout from "@/hoc/withCatalogLayout";
 import { NextPageWithLayout } from "@/layouts/root";
 import { TGenre } from "@/types/book";
-import MuiConnectedList from "@/ui/MuiConnectedList";
 import React from "react";
 import type { GetStaticProps } from "next";
 import { retrieveAllRegisteredGenres } from "@/services/genres-api";

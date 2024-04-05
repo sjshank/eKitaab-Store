@@ -21,6 +21,7 @@ const GenreFormFields = ({
       margin="dense"
       disabled={isSubmitting}
       sx={{ my: 2 }}
+      data-testid="genre-input"
       value={values.name}
       onChange={handleChange}
       onBlur={handleBlur}

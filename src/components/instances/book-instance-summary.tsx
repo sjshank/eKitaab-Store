@@ -14,6 +14,7 @@ const BookInstanceSummary: React.FunctionComponent<TBookInstance> = (
       <MuiSummaryItem label="Status">
         <Typography
           component="span"
+          data-testid="copy-status"
           sx={{
             color: `${STATUS_IDENTITY_MAP[copy.status]}`,
             fontSize: "0.95rem",
@@ -31,4 +32,6 @@ const BookInstanceSummary: React.FunctionComponent<TBookInstance> = (
   );
 };
 
-export default BookInstanceSummary;
+const MemoizedBookInstanceSummary = React.memo(BookInstanceSummary);
+
+export default MemoizedBookInstanceSummary;

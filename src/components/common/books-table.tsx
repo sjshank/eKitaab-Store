@@ -32,7 +32,11 @@ const BooksTable: React.FunctionComponent<{ books: TBook[] }> = ({
                 </Link>
               </CustomizedTabBodyCell>
               <CustomizedTabBodyCell size="small">
-                <span className="char-truncate-one-line">{book.summary}</span>
+                <span
+                  className="char-truncate-one-line"
+                  data-testid="book-summary">
+                  {book.summary}
+                </span>
               </CustomizedTabBodyCell>
             </TableRow>
           ))}

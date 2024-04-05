@@ -28,7 +28,10 @@ const WithDetailLayoutWrapper = (
     return (
       <Box component="article">
         {!isEdit && (
-          <Typography variant="h5" component="summary">
+          <Typography
+            variant="h5"
+            component="summary"
+            data-testid="title-header">
             {props.title}
           </Typography>
         )}

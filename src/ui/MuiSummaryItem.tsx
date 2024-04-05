@@ -10,7 +10,7 @@ const MuiSummaryItem: React.FunctionComponent<{
 }> = ({ label, value = "", children = null }): React.JSX.Element => (
   <ListItem>
     <ListItemText>
-      <Typography variant="subtitle2" component="strong">
+      <Typography variant="subtitle2" component="strong" role="strong">
         {label} :{" "}
       </Typography>
       {children === null && (
@@ -18,6 +18,7 @@ const MuiSummaryItem: React.FunctionComponent<{
           variant="body2"
           component="span"
           color="text.secondary"
+          data-testid="item-value"
           fontSize="0.95rem">
           {value}
         </Typography>

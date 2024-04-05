@@ -8,7 +8,7 @@ const mockDashboardData: TDashboardData[] = [
   { count: 30, label: "Copies Available" },
 ];
 
-describe("Metrics Grid Item", () => {
+describe("Metrics Grid", () => {
   it("Should render a correct number of dashboard cards", () => {
     render(<MetricsGrid dashboard={mockDashboardData} />);
     const labelEles = screen.getAllByTestId("metric-label");
