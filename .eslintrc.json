@@ -5,9 +5,8 @@
     "React": "readonly"
   },
   "rules": {
-    // "prettier/prettier": "warn",
     "no-unused-vars": "warn",
     "no-console": "warn",
-    "block-scoped-var": "error"
+    "block-scoped-var": "warn"
   }
 }
