@@ -1,7 +1,5 @@
 import { render } from "@testing-library/react";
 import Home from "../pages/index";
-import { it } from "node:test";
-import { expect } from "@jest/globals";
 
 const mockDashboard = [
   {
