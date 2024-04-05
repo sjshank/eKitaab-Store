@@ -2,10 +2,29 @@
   "extends": ["next", "next/core-web-vitals"],
   //   "plugins": ["prettier"],
   "globals": {
-    "React": "readonly"
+    "React": true,
+    "JSX": true,
+    "window": true,
+    "render": true,
+    "it": true,
+    "describe": true
   },
   "rules": {
     "no-unused-vars": "warn",
     "no-console": "warn"
-  }
+  },
+  "overrides": [
+    // Only uses Testing Library lint rules in test files
+    {
+      "files": ["**/*.test.*", "**/mocks/**", "**/__mocks__/**"],
+      "extends": ["next/core-web-vitals", "plugin:testing-library/react"],
+      "plugins": ["testing-library"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/naming-convention": "off"
+      }
+    }
+  ]
 }
